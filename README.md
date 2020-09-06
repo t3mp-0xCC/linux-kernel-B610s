@@ -7,21 +7,15 @@ B618s-22d source code(https://consumer.huawei.com/en/opensource/detail/?siteCode
 
 How to configure  
 ------------  
-1. Copy default config file to root of kernel source  
+1. Change current directory  
 ```
 cd path/to/kernel/source
-
-cp arch/arm/configs/B610s_defconfig .config
 ```  
 2. Configure kernel with menuconfig  
 ```
-make menuconfig ARCH=arm
+make menuconfig B610s_defconfig  ARCH=arm
 ```  
-3. Move config file to default configs folder
-```
-mv -f .config arch/arm/configs/B610s_defconfig
-```  
-4. Cleaning  
+3. Cleaning  
 ```
 make mrproper
 ```
