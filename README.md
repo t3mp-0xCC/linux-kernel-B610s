@@ -13,8 +13,14 @@ cd path/to/kernel/source
 ```  
 2. Configure kernel with menuconfig  
 ```
-make menuconfig B610s_defconfig  ARCH=arm
-```  
+make ARCH=arm B610s_defconfig
+
+make menuconfig ARCH=arm 
+```
+4. Overwrite defconfig
+```
+mv -f .config arch/arm/B610s_defconfig
+```
 3. Cleaning  
 ```
 make mrproper
