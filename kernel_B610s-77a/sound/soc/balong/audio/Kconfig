@@ -1,0 +1,6 @@
+config SND_AUDIO_BALONG
+	tristate "ASoC Audio support for Balong"
+	select SND_SOC_WM8990 if I2C
+	help
+	  Say Y or M if you want to add support for audio codecs attached
+	  to the Balong SoCs' AUDIO interfaces.

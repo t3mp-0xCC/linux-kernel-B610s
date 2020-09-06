@@ -1,0 +1,1380 @@
+/*
+ * Copyright (C) Huawei Technologies Co., Ltd. 2013-2015. All rights reserved.
+ *
+ * mobile@huawei.com
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ */
+
+/**********************问题单修改记录******************************************
+日    期              修改人         问题单号           修改内容
+
+******************************************************************************/
+#ifndef _CHG_CHARGE_DRV_H
+#define _CHG_CHARGE_DRV_H
+ /*----------------------------------------------*
+ * 包含头文件                                   *
+ *----------------------------------------------*/
+#include <product_config.h>
+
+
+/*----------------------------------------------*
+ * 外部变量说明                                 *
+ *----------------------------------------------*/
+/*----------------------------------------------*
+ * 外部函数原型说明                             *
+ *----------------------------------------------*/
+/*----------------------------------------------*
+ * 内部函数原型说明                             *
+ *----------------------------------------------*/
+/*----------------------------------------------*
+ * 全局变量                                     *
+ *----------------------------------------------*/
+/*----------------------------------------------*
+ * 模块级变量                                   *
+ *----------------------------------------------*/
+/*----------------------------------------------*
+ * 常量定义                                     *
+ *----------------------------------------------*/
+/*----------------------------------------------*
+ * 宏定义                                       *
+ *----------------------------------------------*/
+
+#if (MBB_CHG_WIRELESS == FEATURE_ON)
+#define CHG_WIRELESS_DPM_VOLT              (4760)
+#endif/*defined(MBB_CHG_WIRELESS)*/
+#if defined(BSP_CONFIG_BOARD_E5) || defined(BSP_CONFIG_BOARD_E5_E5578)
+#define CHG_DEFAULT_DPM_VOLT               (4600)
+#define CHG_AF18_DPM_VOLT                  (4440)
+#else
+#define CHG_DEFAULT_DPM_VOLT               (4200)
+#define CHG_AF18_DPM_VOLT                  (4360)
+#endif
+
+#define DELAY_20_MS    (20)
+#define HVDCP_CUR_TEST_TIMES   (3)
+#define PLUG_UNKNOW                 (-1)
+#define PLUG_IN                      1
+#define PLUG_OUT                     0
+
+#if defined(BSP_CONFIG_BOARD_E5_E5786)
+
+#define VBUS_JUDGEMENT_THRESHOLD     450
+#else
+#define VBUS_JUDGEMENT_THRESHOLD     700
+#endif /*BSP_CONFIG_BOARD_E5_E5786*/
+
+/*充电电流相关宏*/
+#define CHG_CURRENT_4096MA_B8       (4096)
+#define CHG_CURRENT_2048MA_B7       (2048)
+#define CHG_CURRENT_1024MA_B6       (1024)
+#define CHG_CURRENT_512MA_B5        (512)
+#define CHG_CURRENT_256MA_B4        (256)
+#define CHG_CURRENT_128MA_B3        (128)
+#define CHG_CURRENT_64MA_B2         (64)
+
+#define CHG_IINPUT_LIMIT_3250MA     (3250)
+#define CHG_IINPUT_LIMIT_3000MA     (3000)
+#define CHG_IINPUT_LIMIT_2000MA     (2000)
+#define CHG_IINPUT_LIMIT_1500MA     (1500)
+#define CHG_IINPUT_LIMIT_1200MA     (1200)
+#define CHG_IINPUT_LIMIT_1000MA     (1000)
+#define CHG_IINPUT_LIMIT_900MA      (900)
+#define CHG_IINPUT_LIMIT_500MA      (500)
+#define CHG_IINPUT_LIMIT_150MA      (150)
+#define CHG_IINPUT_LIMIT_100MA      (100)
+
+#define CHG_TERM_CURRENT_1024MA     (1024)
+#define CHG_TERM_CURRENT_512MA      (512)
+#define CHG_TERM_CURRENT_256MA      (256)
+#define CHG_TERM_CURRENT_128MA      (128)
+#define CHG_TERM_CURRENT_64MA       (64)
+
+#define CHG_PRECHG_CURRENT_1024MA   (1024)
+#define CHG_PRECHG_CURRENT_512MA    (512)
+#define CHG_PRECHG_CURRENT_256MA    (256)
+#define CHG_PRECHG_CURRENT_128MA    (128)
+#define CHG_PRECHG_CURRENT_64MA      (64)
+
+#define CHG_BAT_VREG_512MV_B7       (512)
+#define CHG_BAT_VREG_256MV_B6       (256)
+#define CHG_BAT_VREG_128MV_B5       (128)
+#define CHG_BAT_VREG_64MV_B4        (64)
+#define CHG_BAT_VREG_32MV_B3        (32)
+#define CHG_BAT_VREG_16MV_B2        (16)
+
+#define CHG_VINDPM_6400MV_B6         (6400)
+#define CHG_VINDPM_3200MV_B5         (3200)
+#define CHG_VINDPM_1600MV_B4         (1600)
+#define CHG_VINDPM_800MV_B3         (800)
+#define CHG_VINDPM_400MV_B2         (400)
+#define CHG_VINDPM_200MV_B1         (200)
+#define CHG_VINDPM_100MV_B0         (100)
+
+/*  BQ25892 Charge IC support.*/
+#define CHG_BOOSTV_OFFSET_512MV     (512)
+#define CHG_BOOSTV_OFFSET_256MV     (256)
+#define CHG_BOOSTV_OFFSET_128MV     (128)
+#define CHG_BOOSTV_OFFSET_64MV      (64)
+
+#define CHG_BCOLD_THOLD_MINUS20DEGC (-20)
+#define CHG_BCOLD_THOLD_MINUS10DEGC (-10)
+#define CHG_BHOT_THOLD_PLUS55DEGC   (55)
+#define CHG_BHOT_THOLD_PLUS60DEGC   (60)
+#define CHG_BHOT_THOLD_PLUS65DEGC   (65)
+
+#define CHG_ICHG_CUR_3200MA    (3200)
+#define CHG_ICHG_CUR_1600MA    (1600)
+#define CHG_ICHG_CUR_800MA    (800)
+#define CHG_ICHG_CUR_400MA    (400)
+#define CHG_ICHG_CUR_200MA    (200)
+#define CHG_ICHG_CUR_100MA    (100)
+#define CHG_ICHG_CUR_50MA    (50)
+
+#define CHG_VBUS_VOL_6400    (6400)
+#define CHG_VBUS_VOL_3200    (3200)
+#define CHG_VBUS_VOL_1600    (1600)
+#define CHG_VBUS_VOL_800    (800)
+#define CHG_VBUS_VOL_400    (400)
+#define CHG_VBUS_VOL_200    (200)
+#define CHG_VBUS_VOL_100    (100)
+
+/*******************  REGISTER INFORMATION ************************************/
+//////////////////////////////////////////////////////
+/*Memory Location: 01, Reset State: 0100 1000*/
+#define BQ25892_INPUT_CTL_REG00    0x00
+/*All 8 Register bits and relevant mask value*/
+#define BQ25892_EN_HIZ_BITPOS    0x7
+#define BQ25892_EN_HIZ                 (0x1 << BQ25892_EN_HIZ_BITPOS)
+#define BQ25892_DIS_HIZ                (0x0 << BQ25892_EN_HIZ_BITPOS)
+#define BQ25892_EN_HIZ_MASK        (0x1 << BQ25892_EN_HIZ_BITPOS)
+
+#define BQ25892_EN_ILIM_BITPOS        0x6
+#define BQ25892_EN_ILIM              (0x1 << BQ25892_EN_ILIM_BITPOS)
+#define BQ25892_DIS_ILIM             (0x0 << BQ25892_EN_ILIM_BITPOS)
+#define BQ25892_EN_ILIM_MASK         (0x1 << BQ25892_EN_ILIM_BITPOS)
+
+#define BQ25892_IINLIMIT_BITPOS     0x0
+
+#define BQ25892_IINLIMIT_0_BITPOS     0x0
+#define BQ25892_IINLIMIT_100        (0x0 << BQ25892_IINLIMIT_BITPOS)
+#define BQ25892_IINLIMIT_150        (0x1 << BQ25892_IINLIMIT_BITPOS)
+#define BQ25892_IINLIMIT_200        (0x2 << BQ25892_IINLIMIT_BITPOS)
+#define BQ25892_IINLIMIT_300        (0x4 << BQ25892_IINLIMIT_BITPOS)
+#define BQ25892_IINLIMIT_500        (0x8 << BQ25892_IINLIMIT_BITPOS)
+#define BQ25892_IINLIMIT_900        (0x10 << BQ25892_IINLIMIT_BITPOS)
+#define BQ25892_IINLIMIT_1000        (0x12 << BQ25892_IINLIMIT_BITPOS)
+#define BQ25892_IINLIMIT_1200        (0x16 << BQ25892_IINLIMIT_BITPOS)
+#define BQ25892_IINLIMIT_1500        (0x1C << BQ25892_IINLIMIT_BITPOS)
+#define BQ25892_IINLIMIT_2000        (0x26 << BQ25892_IINLIMIT_BITPOS)
+#define BQ25892_IINLIMIT_2500        (0x30 << BQ25892_IINLIMIT_BITPOS)
+#define BQ25892_IINLIMIT_3000        (0x3A << BQ25892_IINLIMIT_BITPOS)
+#define BQ25892_IINLIMIT_3250        (0x3F << BQ25892_IINLIMIT_BITPOS)
+
+#define BQ25892_IINLIMIT_OFFSET       100
+#define BQ25892_IINLIMIT_MAX          3250
+#define BQ25892_IINLIMIT_MASK       (0x3F << BQ25892_IINLIMIT_BITPOS)
+
+/*Memory Location: 01, Reset State: 0000 0110*/
+#define BQ25892_REG01     0x01
+/*All 8 Register bits and relevant mask value*/
+#define BQ25892_BHOT_BITPOS         0x6
+#define BQ25892_BHOT1_55DEGC           (0x0 << BQ25892_BHOT_BITPOS)
+#define BQ25892_BHOT0_60DEGC           (0x1 << BQ25892_BHOT_BITPOS)
+#define BQ25892_BHOT2_65DEGC           (0x2 << BQ25892_BHOT_BITPOS)
+#define BQ25892_BHOT_DISABLE           (0x3 << BQ25892_BHOT_BITPOS)
+#define BQ25892_BHOT_MASK      (0x3 << BQ25892_BHOT_BITPOS)
+
+#define BQ25892_BCOLD_BITPOS     0x5
+#define BQ25892_BCOLD0_N10DEGC        (0x0 << BQ25892_BCOLD_BITPOS)
+#define BQ25892_BCOLD1_N20DEGC        (0x1 << BQ25892_BCOLD_BITPOS)
+#define BQ25892_BCOLD_MASK        (0x1 << BQ25892_BCOLD_BITPOS)
+
+#define BQ25892_VINDPM_OS_4_BITPOS     0x4
+#define BQ25892_VINDPM_OS_1600         (0x1 << BQ25892_VINDPM_OS_4_BITPOS)
+
+#define BQ25892_VINDPM_OS_3_BITPOS     0x3
+#define BQ25892_VINDPM_OS_800         (0x1 << BQ25892_VINDPM_OS_3_BITPOS)
+
+#define BQ25892_VINDPM_OS_2_BITPOS     0x2
+#define BQ25892_VINDPM_OS_400         (0x1 << BQ25892_VINDPM_OS_2_BITPOS)
+
+#define BQ25892_VINDPM_OS_1_BITPOS     0x1
+#define BQ25892_VINDPM_OS_200          (0x1 << BQ25892_VINDPM_OS_1_BITPOS)
+
+#define BQ25892_VINDPM_OS_0_BITPOS     0x0
+#define BQ25892_VINDPM_OS_100          (0x1 << BQ25892_VINDPM_OS_0_BITPOS)
+
+#define BQ25892_VINDPM_OS_OFFSET       0
+#define BQ25892_VINDPM_OS_MAX          3100
+#define BQ25892_VINDPM_OS_MASK        (0x1F << BQ25892_VINDPM_OS_0_BITPOS)
+
+/*Memory Location: 02, Reset State: 0001 1101*/
+#define BQ25892_POWER_ON_CFG_REG02    (0x02)
+/*All 8 Register bits and relevant mask value*/
+#define BQ25892_CONV_START_BITPOS        (0x7)
+#define BQ25892_CONV_START        (0x1 << BQ25892_CONV_START_BITPOS)
+#define BQ25892_CONV_DIS        (~BQ25892_CONV_START)
+
+/*NOT ACTIVE*/
+#define BQ25892_CONV_NOT_ACTIVE           (0x0 << BQ25892_CONV_START_BITPOS)
+#define BQ25892_CONV_START_MASK      (0x1 << BQ25892_CONV_START_BITPOS)
+
+#define BQ25892_CONV_RATE_BITPOS       0x6
+#define BQ25892_CONV_RATE_ONE_SHOT             (0x0 << BQ25892_CONV_RATE_BITPOS)
+#define BQ25892_CONV_RATE_CONTINUOUS             (0x1 << BQ25892_CONV_RATE_BITPOS)
+#define BQ25892_CONV_RATE_MASK        (0x1 << BQ25892_CONV_RATE_BITPOS)
+
+#define BQ25892_BOOST_FREQ_BITPOS       0x5
+#define BQ25892_BOOST_FREQ_1500KHZ         (0x0 << BQ25892_BOOST_FREQ_BITPOS)
+#define BQ25892_BOOST_FREQ_500KHZ         (0x1 << BQ25892_BOOST_FREQ_BITPOS)
+#define BQ25892_BOOST_FREQ_MASK        (0x1 << BQ25892_BOOST_FREQ_BITPOS)
+
+#define BQ25892_ICO_EN_BITPOS       0x4
+#define BQ25892_ICO_DIS         (0x0 << BQ25892_ICO_EN_BITPOS)
+#define BQ25892_ICO_EN         (0x1 << BQ25892_ICO_EN_BITPOS)
+#define BQ25892_ICO_EN_MASK        (0x1 << BQ25892_ICO_EN_BITPOS)
+
+/*Only bq25890 supported*/
+#define BQ25890_HVDCP_EN_BITPOS     0x3
+#define BQ25890_HVDCP_DIS       (0x0 << BQ25890_HVDCP_EN_BITPOS)
+#define BQ25890_HVDCP_EN       (0x1 << BQ25890_HVDCP_EN_BITPOS)
+#define BQ25890_HVDCP_EN_MASK       (0x1 << BQ25890_HVDCP_EN_BITPOS)
+
+/*Only bq25890 supported*/
+#define BQ25890_MAXC_EN_BITPOS     0x2
+#define BQ25890_MAXC_DIS       (0x0 << BQ25890_MAXC_EN_BITPOS)
+#define BQ25890_MAXC_EN       (0x1 << BQ25890_MAXC_EN_BITPOS)
+#define BQ25890_MAXC_EN_MASK       (0x1 << BQ25890_MAXC_EN_BITPOS)
+
+#define BQ25892_FORCE_DPDM_BITPOS     0x1
+#define BQ25892_FORCE_DPDM_DIS       (0x0 << BQ25892_FORCE_DPDM_BITPOS)
+#define BQ25892_FORCE_DPDM_EN       (0x1 << BQ25892_FORCE_DPDM_BITPOS)
+#define BQ25892_FORCE_DPDM_MASK       (0x1 << BQ25892_FORCE_DPDM_BITPOS)
+
+#define BQ25892_AUTO_DPDM_EN_BITPOS     0x0
+#define BQ25892_AUTO_DPDM_DIS       (0x0 << BQ25892_AUTO_DPDM_EN_BITPOS)
+#define BQ25892_AUTO_DPDM_EN       (0x1 << BQ25892_AUTO_DPDM_EN_BITPOS)
+#define BQ25892_AUTO_DPDM_EN_MASK       (0x1 << BQ25892_AUTO_DPDM_EN_BITPOS)
+
+/*Memory Location: 03, Reset State: 0001 1010*/
+#define BQ25892_POWER_ON_CFG_REG03     0x03
+/*All 8 Register bits and relevant mask value*/
+#define BQ25892_BAT_LOADEN_BITPOS         0x7
+#define BQ25892_BAT_LOAD_EN           (0x1 << BQ25892_BAT_LOADEN_BITPOS)
+#define BQ25892_BAT_LOAD_DIS           (0x0 << BQ25892_BAT_LOADEN_BITPOS)
+#define BQ25892_BAT_LOAD_MASK      (0x1 << BQ25892_BAT_LOADEN_BITPOS)
+
+/*WDT_RST*/
+#define BQ25892_TMR_RST_BITPOS       0x6
+#define BQ25892_TMR_RST             (0x1 << BQ25892_TMR_RST_BITPOS)
+#define BQ25892_TMR_RST_MASK        (0x1 << BQ25892_TMR_RST_BITPOS)
+
+#define BQ25892_OTG_CFG_BITPOS       0x5
+#define BQ25892_OTG_CFG_DIS         (0x0 << BQ25892_OTG_CFG_BITPOS)
+#define BQ25892_OTG_CFG_EN         (0x1 << BQ25892_OTG_CFG_BITPOS)
+#define BQ25892_OTG_CFG_MASK        (0x1 << BQ25892_OTG_CFG_BITPOS)
+
+#define BQ25892_CHG_CFG_BITPOS       0x4
+#define BQ25892_CHG_CFG_DIS         (0x0 << BQ25892_CHG_CFG_BITPOS)
+#define BQ25892_CHG_CFG_EN         (0x1 << BQ25892_CHG_CFG_BITPOS)
+#define BQ25892_CHG_CFG_MASK        (0x1 << BQ25892_CHG_CFG_BITPOS)
+
+#define BQ25892_SYS_MIN_2_BITPOS     0x3
+#define BQ25892_SYS_MIN_400MV       (0x1 << BQ25892_SYS_MIN_2_BITPOS)
+
+#define BQ25892_SYS_MIN_1_BITPOS     0x2
+#define BQ25892_SYS_MIN_200MV       (0x1 << BQ25892_SYS_MIN_1_BITPOS)
+
+#define BQ25892_SYS_MIN_0_BITPOS     0x1
+#define BQ25892_SYS_MIN_100MV       (0x1 << BQ25892_SYS_MIN_0_BITPOS)
+#define BQ25892_SYS_MIN_OFFSET       3000
+#define BQ25892_SYS_MIN_MASK        (0x7 << BQ25892_SYS_MIN_0_BITPOS)
+
+#define BQ25892_POWER_ON_RESERVE_BITPOS     0x0
+#define BQ25892_POWER_ON_RESERVE     (0x0 << BQ25892_POWER_ON_RESERVE_BITPOS)
+#define BQ25892_POWER_ON_RESERVE_MASK    (0x1 << BQ25892_POWER_ON_RESERVE_BITPOS)
+
+/*Memory Location: 04, Reset State: 0010 0000*/
+#define BQ25892_CHG_CUR_CTL_REG04      0x04
+/*All the 8bits and relevant mask value*/
+#define BQ25892_EN_PUMPX_BITPOS     0x7
+#define BQ25892_PUMPX_DIS        (0x0 << BQ25892_EN_PUMPX_BITPOS)
+#define BQ25892_PUMPX_EN        (0x1 << BQ25892_EN_PUMPX_BITPOS)
+#define BQ25892_PUMPX_EN_MASK        (0x1 << BQ25892_EN_PUMPX_BITPOS)
+
+#define BQ25892_ICHARGE_6_BITPOS     0x6
+#define BQ25892_ICHARGE_4096        (0x1 << BQ25892_ICHARGE_6_BITPOS)
+
+#define BQ25892_ICHARGE_5_BITPOS     0x5
+#define BQ25892_ICHARGE_2048        (0x1 << BQ25892_ICHARGE_5_BITPOS)
+
+#define BQ25892_ICHARGE_4_BITPOS     0x4
+#define BQ25892_ICHARGE_1024         (0x1 << BQ25892_ICHARGE_4_BITPOS)
+
+#define BQ25892_ICHARGE_3_BITPOS     0x3
+#define BQ25892_ICHARGE_512         (0x1 << BQ25892_ICHARGE_3_BITPOS)
+
+#define BQ25892_ICHARGE_2_BITPOS     0x2
+#define BQ25892_ICHARGE_256         (0x1 << BQ25892_ICHARGE_2_BITPOS)
+
+#define BQ25892_ICHARGE_1_BITPOS     0x1
+#define BQ25892_ICHARGE_128          (0x1 << BQ25892_ICHARGE_1_BITPOS)
+
+#define BQ25892_ICHARGE_0_BITPOS     0x0
+#define BQ25892_ICHARGE_64          (0x1 << BQ25892_ICHARGE_0_BITPOS)
+
+#define BQ25892_ICHARGE_OFFSET       0
+#define BQ25892_ICHARGE_MAX          5056
+#define BQ25892_ICHARGE_MASK        (0x7F << BQ25892_ICHARGE_0_BITPOS)
+
+/*Memory Location: 05, Reset State: 0001 0011*/
+#define BQ25892_IPRECHG_TERM_CTL_REG05 0x05
+/*All the 8bits and relevant mask value*/
+#define BQ25892_IPRECHG_3_BITPOS     0x7
+#define BQ25892_IPRECHG_512        (0x1 << BQ25892_IPRECHG_3_BITPOS)
+
+#define BQ25892_IPRECHG_2_BITPOS     0x6
+#define BQ25892_IPRECHG_256         (0x1 << BQ25892_IPRECHG_2_BITPOS)
+
+#define BQ25892_IPRECHG_1_BITPOS     0x5
+#define BQ25892_IPRECHG_128         (0x1 << BQ25892_IPRECHG_1_BITPOS)
+
+#define BQ25892_IPRECHG_0_BITPOS     0x4
+#define BQ25892_IPRECHG_64         (0x1 << BQ25892_IPRECHG_0_BITPOS)
+#define BQ25892_IPRECHG_OFFSET       64
+#define BQ25892_IPRECHG_MAX          1024
+#define BQ25892_IPRECHG_MASK        (0xF << BQ25892_IPRECHG_0_BITPOS)
+
+#define BQ25892_ITERM_3_BITPOS       0x3
+#define BQ25892_ITERM_512          (0x1 << BQ25892_ITERM_3_BITPOS)
+
+#define BQ25892_ITERM_2_BITPOS       0x2
+#define BQ25892_ITERM_256           (0x1 << BQ25892_ITERM_2_BITPOS)
+
+#define BQ25892_ITERM_1_BITPOS       0x1
+#define BQ25892_ITERM_128           (0x1 << BQ25892_ITERM_1_BITPOS)
+
+#define BQ25892_ITERM_0_BITPOS       0x0
+#define BQ25892_ITERM_64           (0x1 << BQ25892_ITERM_0_BITPOS)
+#define BQ25892_ITERM_OFFSET         64
+#define BQ25892_ITERM_MAX            1024
+#define BQ25892_ITERM_MASK          (0xF << BQ25892_ITERM_0_BITPOS)
+
+/*Memory Location: 06, Reset State: 0101 1110*/
+#define BQ25892_CHG_VOLT_CTL_REG06     0x06
+/*All the 8bits and relevant mask value*/
+#define BQ25892_BAT_REG_VOL_5_BITPOS 0x7
+#define BQ25892_BAT_REG_VOL_512     (0x1 << BQ25892_BAT_REG_VOL_5_BITPOS)
+
+#define BQ25892_BAT_REG_VOL_4_BITPOS 0x6
+#define BQ25892_BAT_REG_VOL_256     (0x1 << BQ25892_BAT_REG_VOL_4_BITPOS)
+
+#define BQ25892_BAT_REG_VOL_3_BITPOS 0x5
+#define BQ25892_BAT_REG_VOL_128     (0x1 << BQ25892_BAT_REG_VOL_3_BITPOS)
+
+#define BQ25892_BAT_REG_VOL_2_BITPOS 0x4
+#define BQ25892_BAT_REG_VOL_64      (0x1 << BQ25892_BAT_REG_VOL_2_BITPOS)
+
+#define BQ25892_BAT_REG_VOL_1_BITPOS 0x3
+#define BQ25892_BAT_REG_VOL_32      (0x1 << BQ25892_BAT_REG_VOL_1_BITPOS)
+
+#define BQ25892_BAT_REG_VOL_0_BITPOS 0x2
+#define BQ25892_BAT_REG_VOL_16      (0x1 << BQ25892_BAT_REG_VOL_0_BITPOS)
+#define BQ25892_BAT_REG_VOL_OFFSET   3840
+#define BQ25892_BAT_REG_VOL_MAX      4608
+#define BQ25892_BAT_REG_VOL_MASK    (0x3F << BQ25892_BAT_REG_VOL_0_BITPOS)
+
+#define BQ25892_BATLOW_VOL_BITPOS    0x1
+#define BQ25892_BATLOW_VOL          (0x1 << BQ25892_BATLOW_VOL_BITPOS)
+#define BQ25892_BATLOW_VOL_MASK     (0x1 << BQ25892_BATLOW_VOL_BITPOS)
+
+#define BQ25892_RECHG_VOL_BITPOS     0x0
+#define BQ25892_RECHG_VOL           (0x1 << BQ25892_RECHG_VOL_BITPOS)
+#define BQ25892_RECHG_VOL_MASK      (0x1 << BQ25892_RECHG_VOL_BITPOS)
+
+/*Memory Location: 07, Reset State: 1001 1100*/
+#define BQ25892_TERM_TIMER_CTL_REG07   0x07
+/*All the 8bits and relevant mask value*/
+#define BQ25892_TERM_CUR_BITPOS      0x7
+#define BQ25892_FBD_TERM_CUR        (0x0 << BQ25892_TERM_CUR_BITPOS)
+#define BQ25892_EN_TERM_CUR         (0x1 << BQ25892_TERM_CUR_BITPOS)
+#define BQ25892_TERM_CUR_MASK       (0x1 << BQ25892_TERM_CUR_BITPOS)
+
+#define BQ25892_STAT_DIS_BITPOS     0x6
+#define BQ25892_STAT_DIS      (0x1 << BQ25892_STAT_DIS_BITPOS)
+#define BQ25892_STAT_EN     (0x0 << BQ25892_STAT_DIS_BITPOS)
+#define BQ25892_MATCH_ITERM_MASK    (0x1 << BQ25892_STAT_DIS_BITPOS)
+
+#define BQ25892_WATCHDOG_TMR_BITPOS  0x4
+#define BQ25892_WATCHDOG_TMR_DIS    (0x0 << BQ25892_WATCHDOG_TMR_BITPOS)
+#define BQ25892_WATCHDOG_TMR_40     (0x1 << BQ25892_WATCHDOG_TMR_BITPOS)
+#define BQ25892_WATCHDOG_TMR_80     (0x2 << BQ25892_WATCHDOG_TMR_BITPOS)
+#define BQ25892_WATCHDOG_TMR_160    (0x3 << BQ25892_WATCHDOG_TMR_BITPOS)
+#define BQ25892_WATCHDOG_TMR_MASK   (0x3 << BQ25892_WATCHDOG_TMR_BITPOS)
+
+#define BQ25892_CHG_TIMER_EN_BITPOS  0x3
+#define BQ25892_CHG_TIMER_EN        (0x1 << BQ25892_CHG_TIMER_EN_BITPOS)
+#define BQ25892_CHG_TIMER_DIS       (0x0 << BQ25892_CHG_TIMER_EN_BITPOS)
+#define BQ25892_CHG_TIMER_EN_MASK   (0x1 << BQ25892_CHG_TIMER_EN_BITPOS)
+
+#define BQ25892_CHG_TIMER_BITPOS     0x1
+#define BQ25892_CHG_TIMER_5HRS      (0x0 << BQ25892_CHG_TIMER_BITPOS)
+#define BQ25892_CHG_TIMER_8HRS      (0x1 << BQ25892_CHG_TIMER_BITPOS)
+#define BQ25892_CHG_TIMER_12HRS     (0x2 << BQ25892_CHG_TIMER_BITPOS)
+#define BQ25892_CHG_TIMER_20HRS     (0x3 << BQ25892_CHG_TIMER_BITPOS)
+#define BQ25892_CHG_TIMER_MASK      (0x3 << BQ25892_CHG_TIMER_BITPOS)
+
+#define BQ25892_JEITA_ISET_BITPOS     0x0
+#define BQ25892_FORCE_50PCT              (0x0 << BQ25892_JEITA_ISET_BITPOS)
+#define BQ25892_FORCE_20PCT              (0x1 << BQ25892_JEITA_ISET_BITPOS)
+#define BQ25892_JEITA_ISET_MASK        (0x1 << BQ25892_JEITA_ISET_BITPOS)
+
+/*Memory Location: 08, Reset State: 0000 0011*/
+#define BQ25892_REG08        0x08
+/*BQ25892 Vendor/Part/Revision Reg Info.*/
+#define BQ25892_BAT_COMP_BITPOS     0x5
+#define BQ25892_BAT_COMP_DIS                (0x0 << BQ25892_BAT_COMP_BITPOS)
+#define BQ25892_BAT_COMP_20MO       (0x1 << BQ25892_BAT_COMP_BITPOS)
+#define BQ25892_BAT_COMP_40MO       (0x2 << BQ25892_BAT_COMP_BITPOS)
+#define BQ25892_BAT_COMP_80MO       (0x4 << BQ25892_BAT_COMP_BITPOS)
+#define BQ25892_BAT_COMP_MASK      (0x7 << BQ25892_BAT_COMP_BITPOS)
+
+#define BQ25892_VCLAMP_BITPOS     0x2
+#define BQ25892_VCLAMP_DIS                (0x0 << BQ25892_VCLAMP_BITPOS)
+#define BQ25892_VCLAMP_32MV       (0x1 << BQ25892_VCLAMP_BITPOS)
+#define BQ25892_VCLAMP_64MV       (0x2 << BQ25892_VCLAMP_BITPOS)
+#define BQ25892_VCLAMP_128MV       (0x4 << BQ25892_VCLAMP_BITPOS)
+#define BQ25892_VCLAMP_MASK      (0x7 << BQ25892_VCLAMP_BITPOS)
+
+#define BQ25892_TREG_BITPOS         0x0
+#define BQ25892_TREG_60DEGC         (0x0 << BQ25892_TREG_BITPOS)
+#define BQ25892_TREG_80DEGC         (0x1 << BQ25892_TREG_BITPOS)
+#define BQ25892_TREG_100DEGC        (0x2 << BQ25892_TREG_BITPOS)
+#define BQ25892_TREG_120DEGC        (0x3 << BQ25892_TREG_BITPOS)
+#define BQ25892_TREG_MASK           (0x3 << BQ25892_TREG_BITPOS)
+
+/*Memory Location: 09, Reset State: 0100 0100*/
+#define BQ25892_REG09        0x09
+/*BQ25892 Vendor/Part/Revision Reg Info.*/
+#define BQ25892_FORCE_ICO_BITPOS     0x7
+#define BQ25892_FORCE_ICO                (0x1 << BQ25892_FORCE_ICO_BITPOS)
+#define BQ25892_NOT_FORCE_ICO        (0x0 << BQ25892_FORCE_ICO_BITPOS)
+#define BQ25892_FORCE_ICO_MASK      (0x1 << BQ25892_FORCE_ICO_BITPOS)
+
+#define BQ25892_TMR2X_EN_BITPOS     0x6
+#define BQ25892_TMR2X_EN     (0x1 << BQ25892_TMR2X_EN_BITPOS)
+#define BQ25892_TMR2X_EN_DIS     (0x0 << BQ25892_TMR2X_EN_BITPOS)
+#define BQ25892_TMR2X_EN_MASK      (0x1 << BQ25892_TMR2X_EN_BITPOS)
+
+#define BQ25892_BATFET_OFF_BITPOS    0x5
+#define BQ25892_BATFET_OFF_EN       (0x1 << BQ25892_BATFET_OFF_BITPOS)
+#define BQ25892_BATFET_OFF_DIS      (0x0 << BQ25892_BATFET_OFF_BITPOS)
+#define BQ25892_BATFET_OFF_MASK     (0x1 << BQ25892_BATFET_OFF_BITPOS)
+
+#define BQ25892_JEITA_VSET_BITPOS    0x4
+#define BQ25892_JEITA_VSET_VREG       (0x1 << BQ25892_JEITA_VSET_BITPOS)
+#define BQ25892_JEITA_VSET_VREG_200     (0x0 << BQ25892_JEITA_VSET_BITPOS)
+#define BQ25892_JEITA_VSET_MASK     (0x1 << BQ25892_JEITA_VSET_BITPOS)
+
+#define BQ25892_BATFET_DLY_BITPOS    0x3
+#define BQ25892_BATFET_DLY_EN       (0x0 << BQ25892_BATFET_DLY_BITPOS)
+#define BQ25892_BATFET_DLY_DIS     (0x1 << BQ25892_BATFET_DLY_BITPOS)
+#define BQ25892_BATFET_DLY_MASK     (0x1 << BQ25892_BATFET_DLY_BITPOS)
+
+#define BQ25892_BATFET_RST_EN_BITPOS    0x2
+#define BQ25892_BATFET_RST_EN       (0x1 << BQ25892_BATFET_RST_EN_BITPOS)
+#define BQ25892_BATFET_RST_DIS     (0x0 << BQ25892_BATFET_RST_EN_BITPOS)
+#define BQ25892_BATFET_RST_MASK     (0x1 << BQ25892_BATFET_RST_EN_BITPOS)
+
+#define BQ25892_PUMPX_UP_BITPOS    0x1
+#define BQ25892_PUMPX_UP_EN       (0x1 << BQ25892_PUMPX_UP_BITPOS)
+#define BQ25892_PUMPX_UP_DIS     (0x0 << BQ25892_PUMPX_UP_BITPOS)
+#define BQ25892_PUMPX_UP_MASK     (0x1 << BQ25892_PUMPX_UP_BITPOS)
+
+#define BQ25892_PUMPX_DN_BITPOS    0x0
+#define BQ25892_PUMPX_DN_EN       (0x1 << BQ25892_PUMPX_DN_BITPOS)
+#define BQ25892_PUMPX_DN_DIS     (0x0 << BQ25892_PUMPX_DN_BITPOS)
+#define BQ25892_PUMPX_DN_MASK     (0x1 << BQ25892_PUMPX_DN_BITPOS)
+
+/*Memory Location: 0A, Reset State: 0111 0011*/
+#define BQ25892_BOOST_REG0A        0x0A
+/*BQ25892 Vendor/Part/Revision Reg Info.*/
+#define BQ25892_BOOSTV_BITPOS     0x4
+#define BQ25892_BOOSTV_512MV   (0x8 << BQ25892_BOOSTV_BITPOS)
+#define BQ25892_BOOSTV_256MV       (0x4 << BQ25892_BOOSTV_BITPOS)
+#define BQ25892_BOOSTV_128MV   (0x2 << BQ25892_BOOSTV_BITPOS)
+#define BQ25892_BOOSTV_64MV       (0x1 << BQ25892_BOOSTV_BITPOS)
+#define BQ25892_BOOSTV_MASK      (0xF << BQ25892_BOOSTV_BITPOS)
+#define BQ25892_BOOSTV_OFFSET    4550
+#define BQ25892_BOOSTV_MAX      5510
+
+#define BQ25892_BOOST_RESERVE_BITPOS     0x3
+#define BQ25892_BOOST_RESERVE     (0x0 << BQ25892_BOOST_RESERVE_BITPOS)
+
+#define BQ25892_BOOST_LIM_BITPOS    0X0
+#define BQ25892_BOOST_LIM_500MA   (0x0 << BQ25892_BOOST_LIM_BITPOS)
+#define BQ25892_BOOST_LIM_750MA   (0x1 << BQ25892_BOOST_LIM_BITPOS)
+#define BQ25892_BOOST_LIM_1200MA     (0x2 << BQ25892_BOOST_LIM_BITPOS)
+#define BQ25892_BOOST_LIM_1400MA     (0x3 << BQ25892_BOOST_LIM_BITPOS)
+#define BQ25892_BOOST_LIM_1650MA     (0x4 << BQ25892_BOOST_LIM_BITPOS)
+#define BQ25892_BOOST_LIM_1875MA     (0x5 << BQ25892_BOOST_LIM_BITPOS)
+#define BQ25892_BOOST_LIM_2150MA     (0x6 << BQ25892_BOOST_LIM_BITPOS)
+#define BQ25892_BOOST_LIM_2450MA     (0x7 << BQ25892_BOOST_LIM_BITPOS)
+#define BQ25892_BOOST_LIM_MASK      (0x7 << BQ25892_BOOST_LIM_BITPOS)
+
+/*Memory Location: 0A, Reset State: XXXX XXXX*/
+#define BQ25892_VBUS_STAT_REG0B        0x0B
+/*BQ25892 Vendor/Part/Revision Reg Info.*/
+#define BQ25892_VBUS_STAT_BITPOS     0x5
+#define BQ25892_VBUS_STAT_UNKNOWN   (0x0 << BQ25892_VBUS_STAT_BITPOS)
+#define BQ25892_VBUS_STAT_USB_HOST_SDP       (0x1 << BQ25892_VBUS_STAT_BITPOS)
+#define BQ25892_VBUS_STAT_ADAPTER   (0x2 << BQ25892_VBUS_STAT_BITPOS)
+#define BQ25892_VBUS_STAT_OTG       (0x7 << BQ25892_VBUS_STAT_BITPOS)
+#define BQ25892_VBUS_STAT_MASK      (0x7 << BQ25892_VBUS_STAT_BITPOS)
+
+#define BQ25890_VBUS_STAT_BITPOS     0x5
+#define BQ25890_VBUS_STAT_UNKNOWN   (0x0 << BQ25890_VBUS_STAT_BITPOS)
+#define BQ25890_VBUS_STAT_USB_HOST_SDP       (0x1 << BQ25890_VBUS_STAT_BITPOS)
+#define BQ25890_VBUS_STAT_USB_CDP   (0x2 << BQ25890_VBUS_STAT_BITPOS)
+#define BQ25890_VBUS_STAT_USB_DCP   (0x3 << BQ25890_VBUS_STAT_BITPOS)
+#define BQ25890_VBUS_STAT_HVDCP   (0x4 << BQ25890_VBUS_STAT_BITPOS)
+#define BQ25890_VBUS_STAT_UNKNOWN_ADAPTER   (0x5 << BQ25890_VBUS_STAT_BITPOS)
+#define BQ25890_VBUS_STAT_NOT_SDT_ADAPTER   (0x6 << BQ25890_VBUS_STAT_BITPOS)
+#define BQ25890_VBUS_STAT_OTG       (0x7 << BQ25890_VBUS_STAT_BITPOS)
+#define BQ25890_VBUS_STAT_MASK      (0x7 << BQ25890_VBUS_STAT_BITPOS)
+
+#define BQ25892_CHRG_STAT_BITPOS     0x3
+#define BQ25892_CHRG_STAT_NOCHG     (0x0 << BQ25892_CHRG_STAT_BITPOS)
+#define BQ25892_CHRG_STAT_PRECHG    (0x1 << BQ25892_CHRG_STAT_BITPOS)
+#define BQ25892_CHRG_STAT_FASTCHG   (0x2 << BQ25892_CHRG_STAT_BITPOS)
+#define BQ25892_CHRG_STAT_CHGDONE   (0x3 << BQ25892_CHRG_STAT_BITPOS)
+#define BQ25892_CHRG_STAT_MASK      (0x3 << BQ25892_CHRG_STAT_BITPOS)
+
+#define BQ25892_PG_STAT_BITPOS       0x2
+#define BQ25892_PG_STAT             (0x1 << BQ25892_PG_STAT_BITPOS)
+#define BQ25892_NOPG_STAT           (0x0 << BQ25892_PG_STAT_BITPOS)
+#define BQ25892_PG_STAT_MASK        (0x1 << BQ25892_PG_STAT_BITPOS)
+
+#define BQ25892_SPD_STAT_BITPOS    0x1
+#define BQ25892_SPD_STAT_100   (0x0 << BQ25892_SPD_STAT_BITPOS)
+#define BQ25892_SPD_STAT_500  (0x1 << BQ25892_SPD_STAT_BITPOS)
+#define BQ25892_SPD_STAT_MASK     (0x1 << BQ25892_SPD_STAT_BITPOS)
+
+#define BQ25892_VSYS_STAT_BITPOS     0x0
+#define BQ25892_VSYS_STAT_NOSYSMIN  (0x0 << BQ25892_VSYS_STAT_BITPOS)
+#define BQ25892_VSYS_STAT_INSYSMIN  (0x1 << BQ25892_VSYS_STAT_BITPOS)
+#define BQ25892_VSYS_STAT_MASK      (0x1 << BQ25892_VSYS_STAT_BITPOS)
+
+
+/*********0x0C Fault Register Register (Read Only)**************/
+/*Memory Location: 0C, Reset State: xxxx xxxx*/
+#define BQ25892_FAULT_REG0C            0x0C
+/*All the 8bits and relevant mask value*/
+#define BQ25892_WATCHDOG_FLT_BITPOS  0x7
+#define BQ25892_WATCHDOG_NORMAL     (0x0 << BQ25892_WATCHDOG_FLT_BITPOS)
+#define BQ25892_WATCHDOG_EXP        (0x1 << BQ25892_WATCHDOG_FLT_BITPOS)
+#define BQ25892_WATCHDOG_FLT_MASK   (0x1 << BQ25892_WATCHDOG_FLT_BITPOS)
+
+#define BQ25892_BOOST_FLT_BITPOS     0x6
+#define BQ25892_BOOST_NORMAL        (0x0 << BQ25892_BOOST_FLT_BITPOS)
+#define BQ25892_BOOST_FLT           (0x1 << BQ25892_BOOST_FLT_BITPOS)
+#define BQ25892_BOOST_FLT_MASK      (0x1 << BQ25892_BOOST_FLT_BITPOS)
+
+#define BQ25892_CHRG_FLT_BITPOS      0x4
+#define BQ25892_CHRG_NORMAL         (0x0 << BQ25892_CHRG_FLT_BITPOS)
+#define BQ25892_INPUT_FLT           (0x1 << BQ25892_CHRG_FLT_BITPOS)
+#define BQ25892_THERMAL_SHUTDOWM    (0x2 << BQ25892_CHRG_FLT_BITPOS)
+#define BQ25892_CHRG_TIMER_EXP      (0x3 << BQ25892_CHRG_FLT_BITPOS)
+#define BQ25892_CHRG_FLT_MASK       (0x3 << BQ25892_CHRG_FLT_BITPOS)
+
+#define BQ25892_BAT_FLT_BITPOS       0x3
+#define BQ25892_BAT_NORMAL          (0x0 << BQ25892_BAT_FLT_BITPOS)
+#define BQ25892_BAT_OVP             (0x1 << BQ25892_BAT_FLT_BITPOS)
+#define BQ25892_BAT_FLT_MASK        (0x1 << BQ25892_BAT_FLT_BITPOS)
+
+
+#define BQ25892_NTC_FLT_BITPOS       0x0
+#define BQ25892_NTC_NORMAL          (0x0 << BQ25892_NTC_FLT_BITPOS)
+#define BQ25892_TS_WARM            (0x2 << BQ25892_NTC_FLT_BITPOS)
+#define BQ25892_TS_COOL             (0x3 << BQ25892_NTC_FLT_BITPOS)
+#define BQ25892_TS_COLD            (0x5 << BQ25892_NTC_FLT_BITPOS)
+#define BQ25892_TS_HOT             (0x6 << BQ25892_NTC_FLT_BITPOS)
+
+#define BQ25892_BOOST_NTC_NORMAL           (0x0 << BQ25892_NTC_FLT_BITPOS)
+#define BQ25892_BOOST_TS_COLD           (0x5 << BQ25892_NTC_FLT_BITPOS)
+#define BQ25892_BOOST_TS_HOT            (0x6 << BQ25892_NTC_FLT_BITPOS)
+#define BQ25892_NTC_FLT_MASK        (0x7 << BQ25892_NTC_FLT_BITPOS)
+
+/*Memory Location: 0C, Reset State: 0001 0010*/
+/*Memory Location: 0D, Reset State: */
+#define BQ25892_DPM_CTL_REG0D        0x0D
+/*All 8 Register bits and relevant mask value*/
+#define BQ5892_FORCE_VINDPM_BITPOS        0x7
+#define BQ25892_RUN_RELATIVE_VINDPM           (0x0 << BQ5892_FORCE_VINDPM_BITPOS)
+#define BQ25892_RUN_ABSOLUTE_VINDPM            (0x1 << BQ5892_FORCE_VINDPM_BITPOS)
+#define BQ5892_FORCE_VINDPM_MASK        (0x1 << BQ5892_FORCE_VINDPM_BITPOS)
+
+#define BQ25892_DPM_6_VOL_BITPOS      0x6
+#define BQ25892_DPM_VOL_6400MV       (0x1 << BQ25892_DPM_6_VOL_BITPOS)
+
+#define BQ25892_DPM_5_VOL_BITPOS      0x5
+#define BQ25892_DPM_VOL_3200MV       (0x1 << BQ25892_DPM_5_VOL_BITPOS)
+
+#define BQ25892_DPM_4_VOL_BITPOS      0x4
+#define BQ25892_DPM_VOL_1600MV       (0x1 << BQ25892_DPM_4_VOL_BITPOS)
+
+#define BQ25892_DPM_3_VOL_BITPOS      0x3
+#define BQ25892_DPM_VOL_800MV       (0x1 << BQ25892_DPM_3_VOL_BITPOS)
+
+#define BQ25892_DPM_2_VOL_BITPOS      0x2
+#define BQ25892_DPM_VOL_400MV       (0x1 << BQ25892_DPM_2_VOL_BITPOS)
+
+#define BQ25892_DPM_1_VOL_BITPOS      0x1
+#define BQ25892_DPM_VOL_200MV       (0x1 << BQ25892_DPM_1_VOL_BITPOS)
+
+#define BQ25892_DPM_0_VOL_BITPOS      0x0
+#define BQ25892_DPM_VOL_100MV       (0x1 << BQ25892_DPM_0_VOL_BITPOS)
+
+#define BQ25892_DPM_VOL_OFFSET       3900
+#define BQ25892_DPM_VOL_MAX          15300
+#define BQ25892_DPM_VOL_MASK        (0x7F  << BQ25892_DPM_0_VOL_BITPOS)
+
+/*Memory Location: 0C, Reset State: 0000 0000*/
+/*Memory Location: 0E, Reset State: */
+#define BQ25892_BATV_VOL_REG0E        0x0E
+/*All 8 Register bits and relevant mask value(Read Only)*/
+#define BQ25892_THERM_STAT_BITPOS        0x7
+#define BQ25892_THERM_STAT_NORMAL           (0x0 << BQ25892_THERM_STAT_BITPOS)
+#define BQ25892_THERM_STATE                     (0x1 << BQ25892_THERM_STAT_BITPOS)
+#define BQ5892_THERM_STAT_MASK        (0x1 << BQ25892_THERM_STAT_BITPOS)
+
+#define BQ25892_BATV_6_VOL_BITPOS      0x6
+#define BQ25892_BATV_VOL_1280MV       (0x1 << BQ25892_BATV_6_VOL_BITPOS)
+
+#define BQ25892_BATV_5_VOL_BITPOS      0x5
+#define BQ25892_BATV_VOL_640MV       (0x1 << BQ25892_BATV_5_VOL_BITPOS)
+
+#define BQ25892_BATV_4_VOL_BITPOS      0x4
+#define BQ25892_BATV_VOL_320MV       (0x1 << BQ25892_BATV_4_VOL_BITPOS)
+
+#define BQ25892_BATV_3_VOL_BITPOS      0x3
+#define BQ25892_BATV_VOL_160MV       (0x1 << BQ25892_BATV_3_VOL_BITPOS)
+
+#define BQ25892_BATV_2_VOL_BITPOS      0x2
+#define BQ25892_BATV_VOL_80MV       (0x1 << BQ25892_BATV_2_VOL_BITPOS)
+
+#define BQ25892_BATV_1_VOL_BITPOS      0x1
+#define BQ25892_BATV_VOL_40MV       (0x1 << BQ25892_BATV_1_VOL_BITPOS)
+
+#define BQ25892_BATV_0_VOL_BITPOS      0x0
+#define BQ25892_BATV_VOL_20MV       (0x1 << BQ25892_BATV_0_VOL_BITPOS)
+
+#define BQ25892_BATV_VOL_OFFSET       2304
+#define BQ25892_BATV_VOL_MAX          4848
+#define BQ25892_BATV_VOL_MASK        (0x7F  << BQ25892_BATV_0_VOL_BITPOS)
+
+/*Memory Location: 0C, Reset State: 0000 0000*/
+/*Memory Location: 0E, Reset State: */
+#define BQ25892_SYSV_VOL_REG0F        0x0F
+/*All 8 Register bits and relevant mask value(Read Only)*/
+#define BQ5892_SYSV_RESERVE_BITPOS        0x7
+#define BQ5892_SYSV_RESERVE_MASK        (0x1 << BQ5892_SYSV_RESERVE_BITPOS)
+
+#define BQ25892_SYSV_6_VOL_BITPOS      0x6
+#define BQ25892_SYSV_VOL_1280MV       (0x1 << BQ25892_SYSV_6_VOL_BITPOS)
+
+#define BQ25892_SYSV_5_VOL_BITPOS      0x5
+#define BQ25892_SYSV_VOL_640MV       (0x1 << BQ25892_SYSV_5_VOL_BITPOS)
+
+#define BQ25892_SYSV_4_VOL_BITPOS      0x4
+#define BQ25892_SYSV_VOL_320MV       (0x1 << BQ25892_SYSV_4_VOL_BITPOS)
+
+#define BQ25892_SYSV_3_VOL_BITPOS      0x3
+#define BQ25892_SYSV_VOL_160MV       (0x1 << BQ25892_SYSV_3_VOL_BITPOS)
+
+#define BQ25892_SYSV_2_VOL_BITPOS      0x2
+#define BQ25892_SYSV_VOL_80MV       (0x1 << BQ25892_SYSV_2_VOL_BITPOS)
+
+#define BQ25892_SYSV_1_VOL_BITPOS      0x1
+#define BQ25892_SYSV_VOL_40MV       (0x1 << BQ25892_SYSV_1_VOL_BITPOS)
+
+#define BQ25892_SYSV_0_VOL_BITPOS      0x0
+#define BQ25892_SYSV_VOL_20MV       (0x1 << BQ25892_SYSV_0_VOL_BITPOS)
+
+#define BQ25892_SYSV_VOL_OFFSET       2304
+#define BQ25892_SYSV_VOL_MAX          4848
+#define BQ25892_SYSV_VOL_MASK        (0x7F  << BQ25892_SYSV_0_VOL_BITPOS)
+
+/*Memory Location: 0C, Reset State: 0000 0000*/
+/*Memory Location: 0E, Reset State: */
+#define BQ25892_TSPCT_PERCENT_REG10        0x10
+/*All 8 Register bits and relevant mask value(Read Only)*/
+#define BQ25892_TSPCT_RESERVE_BITPOS        0x7
+#define BQ25892_TSPCT_RESERVE_MASK        (0x1 << BQ25892_TSPCT_RESERVE_BITPOS)
+
+#define BQ25892_TSPCT_6_BITPOS      0x6
+#define BQ25892_TSPCT_29760       (0x1 << BQ25892_TSPCT_6_BITPOS)
+
+#define BQ25892_TSPCT_5_BITPOS      0x5
+#define BQ25892_TSPCT_14880       (0x1 << BQ25892_TSPCT_5_BITPOS)
+
+#define BQ25892_TSPCT_4_BITPOS      0x4
+#define BQ25892_TSPCT_7440       (0x1 << BQ25892_TSPCT_4_BITPOS)
+
+#define BQ25892_TSPCT_3_BITPOS      0x3
+#define BQ25892_TSPCT_3720       (0x1 << BQ25892_TSPCT_3_BITPOS)
+
+#define BQ25892_TSPCT_2_BITPOS      0x2
+#define BQ25892_TSPCT_1860       (0x1 << BQ25892_TSPCT_2_BITPOS)
+
+#define BQ25892_TSPCT_1_BITPOS      0x1
+#define BQ25892_TSPCT_930       (0x1 << BQ25892_TSPCT_1_BITPOS)
+
+#define BQ25892_TSPCT_0_BITPOS      0x0
+#define BQ25892_TSPCT_465       (0x1 << BQ25892_TSPCT_0_BITPOS)
+
+/*Memory Location: 0C, Reset State: 0000 0000*/
+/*Memory Location: 0D, Reset State: */
+#define BQ25892_VBUSV_VOL_REG11        0x11
+/*All 8 Register bits and relevant mask value(Read Only)*/
+#define BQ5892_VBUS_GD_BITPOS        0x7
+#define BQ25892_VBUS_NOT_ATTACHED           (0x0 << BQ5892_VBUS_GD_BITPOS)
+#define BQ25892_VBUS_ATTACHED            (0x1 << BQ5892_VBUS_GD_BITPOS)
+#define BQ5892_VBUS_GD_MASK        (0x1 << BQ5892_VBUS_GD_BITPOS)
+
+#define BQ25892_VBUSV_6_VOL_BITPOS      0x6
+#define BQ25892_VBUSV_VOL_6400MV       (0x1 << BQ25892_VBUSV_6_VOL_BITPOS)
+
+#define BQ25892_VBUSV_5_VOL_BITPOS      0x5
+#define BQ25892_VBUSV_VOL_3200MV       (0x1 << BQ25892_VBUSV_5_VOL_BITPOS)
+
+#define BQ25892_VBUSV_4_VOL_BITPOS      0x4
+#define BQ25892_VBUSV_VOL_1600MV       (0x1 << BQ25892_VBUSV_4_VOL_BITPOS)
+
+#define BQ25892_VBUSV_3_VOL_BITPOS      0x3
+#define BQ25892_VBUSV_VOL_800MV       (0x1 << BQ25892_VBUSV_3_VOL_BITPOS)
+
+#define BQ25892_VBUSV_2_VOL_BITPOS      0x2
+#define BQ25892_VBUSV_VOL_400MV       (0x1 << BQ25892_VBUSV_2_VOL_BITPOS)
+
+#define BQ25892_VBUSV_1_VOL_BITPOS      0x1
+#define BQ25892_VBUSV_VOL_200MV       (0x1 << BQ25892_VBUSV_1_VOL_BITPOS)
+
+#define BQ25892_VBUSV_0_VOL_BITPOS      0x0
+#define BQ25892_VBUSV_VOL_100MV       (0x1 << BQ25892_VBUSV_0_VOL_BITPOS)
+
+#define BQ25892_VBUSV_VOL_OFFSET       2600
+#define BQ25892_VBUSV_VOL_MAX          15300
+#define BQ25892_VBUSV_VOL_MASK        (0x7F  << BQ25892_VBUSV_0_VOL_BITPOS)
+
+/*Memory Location: 0X12, Reset State: 0000 0000*/
+#define BQ25892_ICHGR_CUR_REG12        0x12
+/*All 8 Register bits and relevant mask value(Read Only)*/
+#define BQ25892_ICHGR_RESERVE_BITPOS        0x7
+#define BQ25892_ICHGR_RESERVE_MASK        (0x1 << BQ25892_ICHGR_RESERVE_BITPOS)
+
+#define BQ25892_ICHGR_6_CUR_BITPOS      0x6
+#define BQ25892_ICHGR_CUR_3200MA       (0x1 << BQ25892_ICHGR_6_CUR_BITPOS)
+
+#define BQ25892_ICHGR_5_CUR_BITPOS      0x5
+#define BQ25892_ICHGR_CUR_1600MA       (0x1 << BQ25892_ICHGR_5_CUR_BITPOS)
+
+#define BQ25892_ICHGR_4_CUR_BITPOS      0x4
+#define BQ25892_ICHGR_CUR_800MA       (0x1 << BQ25892_ICHGR_4_CUR_BITPOS)
+
+#define BQ25892_ICHGR_3_CUR_BITPOS      0x3
+#define BQ25892_ICHGR_CUR_400MA       (0x1 << BQ25892_ICHGR_3_CUR_BITPOS)
+
+#define BQ25892_ICHGR_2_CUR_BITPOS      0x2
+#define BQ25892_ICHGR_CUR_200MA       (0x1 << BQ25892_ICHGR_2_CUR_BITPOS)
+
+#define BQ25892_ICHGR_1_CUR_BITPOS      0x1
+#define BQ25892_ICHGR_CUR_100MA       (0x1 << BQ25892_ICHGR_1_CUR_BITPOS)
+
+#define BQ25892_ICHGR_0_CUR_BITPOS      0x0
+#define BQ25892_ICHGR_CUR_50MA       (0x1 << BQ25892_ICHGR_0_CUR_BITPOS)
+
+#define BQ25892_ICHGR_CUR_OFFSET       0
+#define BQ25892_ICHGR_CUR_MAX          6350
+#define BQ25892_ICHGR_CUR_MASK        (0x7F  << BQ25892_ICHGR_0_CUR_BITPOS)
+
+/*Memory Location: 0X13, Reset State: 0000 0000*/
+#define BQ25892_IDPM_REG13        0x13
+/*All 8 Register bits and relevant mask value(Read Only)*/
+#define BQ25892_VINDPM_STAT_BITPOS        0x7
+#define BQ25892_NOT_VINDPM_STAT        (0x0 << BQ25892_VINDPM_STAT_BITPOS)
+#define BQ25892_VINDPM_STAT        (0x1 << BQ25892_VINDPM_STAT_BITPOS)
+#define BQ25892_VINDPM_STAT_MASK        (0x1 << BQ25892_VINDPM_STAT_BITPOS)
+
+#define BQ25892_IINDPM_STAT_BITPOS      0x6
+#define BQ25892_NOT_IINPDM_STAT       (0x0 << BQ25892_IINDPM_STAT_BITPOS)
+#define BQ25892_IINDPM_STAT       (0x1 << BQ25892_IINDPM_STAT_BITPOS)
+#define BQ25892_IINDPM_STAT_MASK       (0x1 << BQ25892_IINDPM_STAT_BITPOS)
+
+#define BQ25892_IDPM_LIM_5_CUR_BITPOS      0x5
+#define BQ25892_IDPM_LIM_CUR_1600MA       (0x1 << BQ25892_IDPM_LIM_5_CUR_BITPOS)
+
+#define BQ25892_IDPM_LIM_4_CUR_BITPOS      0x4
+#define BQ25892_IDPM_LIM_CUR_800MA       (0x1 << BQ25892_IDPM_LIM_4_CUR_BITPOS)
+
+#define BQ25892_IDPM_LIM_3_CUR_BITPOS      0x3
+#define BQ25892_IDPM_LIM_CUR_400MA       (0x1 << BQ25892_IDPM_LIM_3_CUR_BITPOS)
+
+#define BQ25892_IDPM_LIM_2_CUR_BITPOS      0x2
+#define BQ25892_IDPM_LIM_CUR_200MA       (0x1 << BQ25892_IDPM_LIM_2_CUR_BITPOS)
+
+#define BQ25892_IDPM_LIM_1_CUR_BITPOS      0x1
+#define BQ25892_IDPM_LIM_CUR_100MA       (0x1 << BQ25892_IDPM_LIM_1_CUR_BITPOS)
+
+#define BQ25892_IDPM_LIM_0_CUR_BITPOS      0x0
+#define BQ25892_IDPM_LIM_CUR_50MA       (0x1 << BQ25892_IDPM_LIM_0_CUR_BITPOS)
+
+#define BQ25892_IDPM_LIM_CUR_OFFSET       100
+#define BQ25892_IDPM_LIM_CUR_MAX          3250
+#define BQ25892_IDPM_LIM_CUR_MASK        (0x3F  << BQ25892_IDPM_LIM_0_CUR_BITPOS)
+
+/*********0x0A Vender Register Register (Read Only)**************/
+/*Memory Location: 0X14, Fix State: 0000 0000*/
+#define BQ25892_REVISION_REG14        0x14
+#define BQ25892_RESET_BITPOS         0x7
+#define BQ25892_RESET_ALL           (0x1 << BQ25892_RESET_BITPOS)
+#define BQ25892_RESET_ALL_MASK      (0x1 << BQ25892_RESET_BITPOS)
+
+#define BQ25892_ICO_OPTIMIZED_BITPOS         0x6
+#define BQ25892_ICO_OPTIMIZED           (0x0 << BQ25892_ICO_OPTIMIZED_BITPOS)
+#define BQ25892_ICO_OPTIMIZED_MAX           (0x1 << BQ25892_ICO_OPTIMIZED_BITPOS)
+#define BQ25892_ICO_OPTIMIZED_MASK      (0x1 << BQ25892_ICO_OPTIMIZED_BITPOS)
+
+#define BQ2589x_PART_NR_BITPOS      0x3
+#define BQ25892_PART_NR_VALUE       (0x0 << BQ2589x_PART_NR_BITPOS)
+#define BQ25890_PART_NR_VALUE       (0x3 << BQ2589x_PART_NR_BITPOS)
+#define BQ2589x_PART_NR_MASK        (0x7 << BQ2589x_PART_NR_BITPOS)
+
+#define BQ25892_TS_PROFILE_BITPOS      0x2
+#define BQ25892_COLD_OR_HOT       (0x0 << BQ25892_TS_PROFILE_BITPOS)
+#define BQ25890_JEITA                     (0x1 << BQ25892_TS_PROFILE_BITPOS)
+#define BQ2589x_TS_PROFILE_MASK        (0x1 << BQ25892_TS_PROFILE_BITPOS)
+
+#define BQ25892_REVISION_BITPOS     0x0
+#define BQ25892_REVISION_VAL        (0x1 << BQ25892_REVISION_BITPOS)
+#define BQ25892_REVISION_MASK       (0x3 << BQ25892_REVISION_BITPOS)
+
+/*****************************内部结构体定义********************************/
+typedef enum
+{
+    CHG_STAT_UNKNOWN,
+    CHG_STAT_USB_HOST,
+    CHG_STAT_ADAPTER_PORT,
+    CHG_STAT_OTG
+}chg_dcdc_vbus_stat;
+
+typedef enum
+{
+    CHG_STAT_NOT_CHARGING,
+    CHG_STAT_PRE_CHARGING,
+    CHG_STAT_FAST_CHARGING,
+    CHG_STAT_CHARGE_DONE
+}chg_dcdc_chrg_stat;
+
+typedef enum
+{
+    CHG_WATCHDOG_NORMAL,
+    CHG_WATCHDOG_EXP
+}chg_dcdc_watchdog_fault;
+
+typedef enum
+{
+    CHG_FAULT_NORMAL,
+    CHG_FAULT_INPUT_FLT,
+    CHG_FAULT_THERMAL_SHUTDOWN,
+    CHG_FAULT_SAFTY_TIMER_EXP
+}chg_dcdc_chrg_fault;
+
+typedef enum
+{
+    CHG_BAT_NORMAL,
+    CHG_BAT_OVP
+}chg_dcdc_bat_fault;
+
+/*充电芯片电池状态的数据结构类型定义*/
+typedef enum
+{
+    CHG_BATT_NORMAL,
+    CHG_BATT_OVP,
+    CHG_BATT_ABSENT,
+    CHG_BATT_INVALID
+}chg_dcdc_batt_status;
+
+/*充电CE状态*/
+typedef enum
+{
+    CHG_CONFIG_CHG_DIS,
+    CHG_CONFIG_CHG_BAT,
+    CHG_CONFIG_CHG_OTG,
+}chg_dcdc_ce_status;
+
+/*充电芯片所有状态的数据结构类型定义*/
+typedef struct
+{
+    chg_dcdc_vbus_stat          chg_vbus_stat;
+    chg_dcdc_chrg_stat          chg_chrg_stat;
+    chg_dcdc_watchdog_fault     chg_watchdog_fault;
+    chg_dcdc_chrg_fault         chg_chrg_fault;
+    chg_dcdc_bat_fault          chg_bat_fault;
+    chg_dcdc_ce_status          chg_ce_stat;
+}chg_status_type;
+
+/*充电芯片控制相关的数据结构类型定义*/
+typedef enum
+{
+    LOW_CTRL_VAL,
+    HIGH_CTRL_VAL
+}
+chg_charge_control_value;
+
+typedef enum
+{
+    CHG_5HOUR_SAFETY_TIMER,
+    CHG_8HOUR_SAFETY_TIMER,
+    CHG_12HOUR_SAFETY_TIMER,
+    CHG_20HOUR_SAFETY_TIMER,
+    CHG_DISABLE_SAFETY_TIMER
+}
+chg_safety_timer_value;
+
+typedef enum
+{
+    CHG_DISABLE_WATCHDOG_TIMER,
+    CHG_40S_WATCHDOG_TIMER,
+    CHG_80S_WATCHDOG_TIMER,
+    CHG_160S_WATCHDOG_TIMER
+}
+chg_watchdog_timer_value;
+
+typedef enum
+{
+    CHG_STOP_COMPLETE,
+    CHG_STOP_TIMEOUT,
+    CHG_STOP_INVALID_TEMP,
+    CHG_STOP_BY_SW,
+    CHG_STOP_SUPPLY_ERR,
+    CHG_STOP_BAT_ERR,
+    CHG_STOP_OTHER_REASON
+}
+chg_stop_reason;
+
+typedef enum
+{
+    CHG_SUPPLY_PREFER_IN,
+    CHG_SUPPLY_PREFER_USB
+}
+chg_supply_prefer_value;
+
+typedef enum
+{
+    CHG_CHIP_PN_BQ25892,
+    CHG_CHIP_PN_BQ25890,
+    CHG_CHIP_PN_INVALID
+}
+chg_chip_part_nr;
+
+typedef enum
+{
+    CHG_AFVC_32MV,
+    CHG_AFVC_64MV,
+    CHG_AFVC_96MV,
+    CHG_AFVC_128MV,
+    CHG_AFVC_160MV,
+    CHG_AFVC_192MV,
+    CHG_AFVC_224MV,
+    CHG_AFVC_DIS
+} chg_afvc_voltage_type;
+
+/******************************************************************************
+Function:       chg_set_cur_level
+Description:    设定充电芯片对电池的充电电流
+Input:          充电电流值
+Output:         N/A
+Return:         TRUE     : 函数执行成功
+                FALSE    : 函数执行失败
+Others:         N/A
+******************************************************************************/
+boolean chg_set_cur_level(uint32_t chg_cur);
+
+/******************************************************************************
+  Function      chg_set_supply_limit
+  Description   设定输入电流限制
+  Input         输入电流值
+  Output        N/A
+  Return        TRUE      : 函数执行成功
+                FALSE     : 函数执行失败
+  Others        N/A
+******************************************************************************/
+boolean chg_set_supply_limit(uint32_t lmt_val);
+
+/******************************************************************************
+Function:       chg_get_supply_limit
+Description:    获取充电芯片前端限流
+Input:          充电电流值
+Output:         N/A
+Return:         TRUE     : 函数执行成功
+                FALSE    : 函数执行失败
+Others:         N/A
+******************************************************************************/
+uint8_t chg_get_supply_limit(void);
+
+/******************************************************************************
+  Function      chg_set_term_current
+  Description   设置充电截止电流
+  Input         截止电流值
+  Output        N/A
+  Return        TRUE      : 函数执行成功
+                FALSE     : 函数执行失败
+  Others        N/A
+******************************************************************************/
+boolean chg_set_term_current(uint32_t term_val);
+
+/******************************************************************************
+  Function      chg_set_charge_enable
+  Description   设定是否使能充电
+  Input         en_val:TRUE   表明使能充电
+                       FALSE  表明禁止充电
+  Output        N/A
+  Return        TRUE      : 函数执行成功
+                FALSE     : 函数执行失败
+  Others        N/A
+******************************************************************************/
+boolean chg_set_charge_enable(boolean enable);
+
+/******************************************************************************
+  Function      chg_set_vreg_level
+  Description   设置恒压充电电压
+  Input         充电恒压电压值
+  Output        N/A
+  Return        TRUE      : 函数执行成功
+                FALSE     : 函数执行失败
+  Others        N/A
+******************************************************************************/
+boolean chg_set_vreg_level(uint32_t vreg_val);
+
+/******************************************************************************
+  Function      chg_set_suspend_mode
+  Description   设置充电IC为suspend模式
+  Input         hz_mode: TRUE   表明设定充电芯片进入suspend模式
+                         FALSE  表明设定芯片退出suspend模式
+  Output        N/A
+  Return        TRUE      : 函数执行成功
+                FALSE     : 函数执行失败
+  Others        N/A
+******************************************************************************/
+boolean chg_set_suspend_mode(boolean enable);
+
+/******************************************************************************
+  Function      chg_set_supply_prefer
+  Description   设定充电芯片输入端的优先级
+  Input         chg_cur: CHG_SUPPLY_PREFER_IN   表明输入优先级为IN优先
+                         CHG_SUPPLY_PREFER_USB  表明输入优先级为USB优先
+  Output        N/A
+  Return        TRUE      : 函数执行成功
+                FALSE     : 函数执行失败
+  Others        N/A
+******************************************************************************/
+boolean chg_set_supply_prefer(chg_supply_prefer_value sup_val);
+
+/******************************************************************************
+  Function      chg_set_te_enable
+  Description   设定是否使能截止电流
+  Input         chg_cur: TRUE   表明使能充电截止电流，充电电流达到设定的
+                                截止值后充电就会停止
+                         FALSE  表明禁止充电截止电流
+  Output        N/A
+  Return        TRUE      : 函数执行成功
+                FALSE     : 函数执行失败
+  Others        N/A
+******************************************************************************/
+boolean chg_set_te_enable(boolean enable);
+
+/******************************************************************************
+  Function      chg_set_ts_enable
+  Description   设定芯片温度保护功能使能
+  Input         chg_cur: TRUE   使能芯片自带的温度保护功能
+                         FALSE  禁用芯片自带的温度保护功能
+  Output        N/A
+  Return        TRUE      : 函数执行成功
+                FALSE     : 函数执行失败
+  Others        N/A
+******************************************************************************/
+boolean chg_set_ts_enable(boolean enable);
+
+/******************************************************************************
+  Function      chg_set_charge_mode
+  Description   设定芯片是否进行涓流充电
+  Input         chg_cur: TRUE   使能LOW_CHG功能，芯片以100mA小电流对
+                         电池进行充电
+                         FALSE  禁用LOW_CHG功能，芯片以0x05寄存器设定
+                         的充电电流对电池进行充电
+  Output        N/A
+  Return        TRUE      : 函数执行成功
+                FALSE     : 函数执行失败
+  Others        N/A
+******************************************************************************/
+boolean chg_set_charge_mode(boolean enable);
+
+/******************************************************************************
+  Function      chg_set_stat_enable
+  Description   设定芯片是否使能STAT比特位
+  Input         chg_cur: TRUE   使能STAT比特位
+                         FALSE  禁用STAT比特位
+  Output        N/A
+  Return        TRUE      : 函数执行成功
+                FALSE     : 函数执行失败
+  Others        N/A
+******************************************************************************/
+boolean chg_set_stat_enable(boolean enable);
+
+/******************************************************************************
+  Function      chg_set_dpm_val
+  Description   设定DPM值，即当充电器输入电压小于该设定值之后，芯片会避免
+                输入电压的进一步下降(避免输入电流无限制增大导致损坏充电设备)
+                从而逐渐减小甚至停止对电池进行充电，以全部电流用于给系统供电
+                目前DPM设定值为4.2V
+  Input         N/A
+  Output        N/A
+  Return        TRUE      : 函数执行成功
+                FALSE     : 函数执行失败
+  Others        N/A
+******************************************************************************/
+boolean chg_set_dpm_val(uint32_t dpm_val);
+
+/******************************************************************************
+  Function      chg_set_safety_timer_enable
+  Description   设定是否使能充电芯片的安全计时器功能
+  Input         chg_cur: 00 (01,10) 使能安全计时器，芯片默认使能，并以27min
+                         对快速充电时间进行限制(6h,9h)
+                         11  禁用安全计时器
+  Output        N/A
+  Return        TRUE      : 函数执行成功
+                FALSE     : 函数执行失败
+  Others        N/A
+******************************************************************************/
+boolean chg_set_safety_timer_enable(chg_safety_timer_value tmr_val);
+
+/******************************************************************************
+  Function      chg_set_tmr_rst
+  Description   对充电芯片执行踢狗操作
+  Input         N/A
+  Output        N/A
+  Return        TRUE      : 函数执行成功
+                FALSE     : 函数执行失败
+  Others        N/A
+******************************************************************************/
+boolean chg_set_tmr_rst(void);
+
+/******************************************************************************
+  Function      chg_reset_all_reg
+  Description   重置所有BQ25892寄存器至默认配置
+  Input         N/A
+  Output        N/A
+  Return        TRUE      : 函数执行成功
+                FALSE     : 函数执行失败
+  Others        N/A
+******************************************************************************/
+boolean chg_reset_all_reg(void);
+
+/******************************************************************************
+  Function      chg_get_suspend_status
+  Description   获取充电IC状态，是否是suspend模式
+  Input         N/A
+  Output
+  Return        TRUE      : suspend模式
+                FALSE     : 非suspend模式
+  Others        N/A
+******************************************************************************/
+boolean chg_get_suspend_status(void);
+
+/******************************************************************************
+  Function      chg_get_IC_status
+  Description   获取充电IC状态，读取充电芯片所有寄存器的值，并识别其中的只读
+                比特位，写入chg_status_type结构体中，该结构体能体现所有充电芯片
+                状态
+  Input         N/A
+  Output        chg_status_type: 该结构中，
+                chg_dcdc_status           表明总体充电器状态，
+                chg_dcdc_fault_status     表明充电是否出现错误，
+                chg_dcdc_in_supply_status 表明IN输入源是否正常，
+                chg_dcdc_usb_supply_status表明USB输入源是否正常，
+                chg_dcdc_batt_status      表明电池是否正常
+  Return        TRUE      : 函数执行成功
+                FALSE     : 函数执行失败
+  Others        N/A
+******************************************************************************/
+boolean chg_get_IC_status(chg_status_type *chg_stat_ptr);
+
+/******************************************************************************
+  Function      chg_is_charger_present
+  Description   外电源是否在位
+  Input         N/A
+  Output        N/A
+  Return        FALSE     : 外电源不在位
+                TRUE      : 外电源在位
+  Others        N/A
+******************************************************************************/
+extern boolean chg_is_charger_present(void);
+
+/******************************************************************************
+  Function      chg_is_IC_charging
+  Description   充电IC是否在充电
+  Input         N/A
+  Output        N/A
+  Return        TRUE     : 正在充电
+                FALSE    : 停止充电
+  Others        N/A
+******************************************************************************/
+boolean chg_is_IC_charging(void);
+
+/******************************************************************************
+  Function      chg_get_stop_charging_reason
+  Description   获取充电停止原因
+  Input         N/A
+  Output        N/A
+  Return        充电停止原因chg_stop_reason:
+                CHG_STOP_COMPLETE,
+                CHG_STOP_TIMEOUT,
+                CHG_STOP_INVALID_TEMP,
+                CHG_STOP_BY_SW
+  Others        N/A
+******************************************************************************/
+chg_stop_reason chg_get_stop_charging_reason(void);
+
+/******************************************************************************
+  Function      chg_set_chip_cd
+  Description   设置芯片片选使能
+  Input         拉低芯片对应的CD的GPIO表示使能芯片，拉高表示关闭芯片
+  Output        N/A
+  Return        TRUE      : 函数执行成功
+                FALSE     : 函数执行失败
+  Others        N/A
+******************************************************************************/
+void chg_set_chip_cd(boolean enable);
+
+
+/******************************************************************************
+  Function      chg_set_boost_therm_protect_threshold
+  Description   设置充电芯片BOOST模式下温度保护门限值
+  Input         temp      : 待设置的门限值温度, 0 表示禁用保护功能。
+  Output        N/A
+  Return        TRUE      : 函数执行成功
+                FALSE     : 函数执行失败
+  Others        该接口目前仅BQ24296芯片支持，其他芯片直接返回TRUE.
+******************************************************************************/
+boolean chg_set_boost_therm_protect_threshold(int32_t temp);
+
+/******************************************************************************
+  Function      chg_set_boost_volt
+  Description   设置充电芯片BOOST模式电压值
+  Input         待设置的Boost模式电压值
+  Output        N/A
+  Return        TRUE      : 函数执行成功
+                FALSE     : 函数执行失败
+  Others        该接口目前仅BQ24296芯片支持，其他芯片返回TRUE.
+******************************************************************************/
+boolean chg_set_boost_volt(uint32_t boostv);
+
+/******************************************************************************
+  Function      chg_get_part_nr
+  Description   获取充电芯片的型号，目前支持bq24196与bq24296
+  Input         N/A
+  Output        pn        : 返回的芯片型号
+  Return        TRUE      : 函数执行成功
+                FALSE     : 函数执行失败
+  Others        N/A
+******************************************************************************/
+boolean chg_get_part_nr(chg_chip_part_nr *pn);
+
+/******************************************************************************
+  Function      boolean chg_chip_init
+  Description   充电芯片初始化
+  Input         N/A
+  Output        N/A
+  Return        TRUE      : 函数执行成功
+                FALSE     : 函数执行失败
+  Others        N/A
+******************************************************************************/
+boolean chg_chip_init(void);
+
+/******************************************************************************
+  Function      chg_charger_event_api
+  Description   为电源插入\拔除中断检测使用的api函数
+  Input         charger_status
+                    TRUE:  进入
+                    FALSE:  拔除
+  Output        N/A
+  Return        N/A
+  Others        N/A
+******************************************************************************/
+void chg_charger_event_api(boolean charger_status);
+
+/******************************************************************************
+  Function      chg_dump_ic_hwinfo
+  Description   Dump充电IC所有的硬件相关信息，包括寄存器或者PIN脚状态。
+  Input         N/A
+  Output        N/A
+  Return        N/A
+  Others        N/A
+******************************************************************************/
+boolean chg_dump_ic_hwinfo(void);
+
+/******************************************************************************
+  Function      chg_get_hvdcp_charge_current
+  Description   获取充电电流大小用于1C+0.5C充电判断
+  Input
+  Output        N/A
+  Return        TRUE      : 函数执行成功
+                FALSE     : 函数执行失败
+  Others        N/A
+******************************************************************************/
+extern int32_t chg_get_hvdcp_charge_current(void);
+
+#if (MBB_CHG_WIRELESS == FEATURE_ON)
+
+void chg_set_wireless_chg_enable(boolean enable);
+#endif/*MBB_CHG_WIRELESS*/
+
+#if (MBB_CHG_EXTCHG == FEATURE_ON)
+/******************************************************************************
+  Function      chg_extchg_ocp_detect
+  Description   对外充电过流检测
+  Input         N/A
+  Output
+  Return        TURE:过流
+                FALSE:没有过流
+  Others        N/A
+******************************************************************************/
+boolean chg_extchg_ocp_detect(void);
+/******************************************************************************
+  Function      chg_set_charge_otg_enable
+  Description   设定是否使能对外充电的OTG模式
+  Input         en_val:TRUE   表明使能OTG
+                       FALSE  表明禁止OTG
+  Output        N/A
+  Return        TRUE      : 函数执行成功
+                FALSE     : 函数执行失败
+  Others        N/A
+******************************************************************************/
+boolean chg_set_charge_otg_enable(boolean enable);
+
+
+void chg_set_extchg_chg_enable(boolean enable);
+
+#endif/*MBB_CHG_EXTCHG*/
+
+#endif

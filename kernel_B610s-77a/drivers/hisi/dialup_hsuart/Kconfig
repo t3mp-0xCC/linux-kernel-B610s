@@ -1,0 +1,13 @@
+#
+# Balong dialup hsuart driver configuration
+#
+
+comment "dialup uart driver"
+
+config DIALUP_UART
+	tristate "dialup uart "
+	default n
+	help
+		dialup uart
+		
+	

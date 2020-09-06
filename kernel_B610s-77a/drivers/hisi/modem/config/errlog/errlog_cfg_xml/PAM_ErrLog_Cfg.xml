@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<errlog_catalog NAME="PAM" MODE="CDMA">
+    <!-- Warning：xml改动需要重新生成errlog_cfg.c-->
+    <errlog TYPE="ERROR_REPORT" FAULT_ID="FAULT_ID_PS_DATA_LINK_ABORT" PID="WUEPS_PID_MMA" ALARM_ID='Alarm_id_2' MODME_NUME="0"/>
+    <errlog TYPE="ERROR_REPORT" FAULT_ID="FAULT_ID_PS_DATA_LINK_ABORT" PID="WUEPS_PID_MMA_1" ALARM_ID='Alarm_id_2' MODME_NUME="1"/>
+    <errlog TYPE="ERROR_REPORT" FAULT_ID="FAULT_ID_PS_DATA_LINK_ABORT" PID="WUEPS_PID_MMA_2" ALARM_ID='Alarm_id_2' MODME_NUME="2"/>
+
+    <errlog TYPE="ERROR_REPORT" FAULT_ID="FAULT_ID_HRPD_OOS_" PID="UEPS_PID_HSD" ALARM_ID='Alarm_id_5' MODME_NUME="0"/>
+    <errlog TYPE="ERROR_REPORT" FAULT_ID="FAULT_ID_HRPD_OOS_" PID="UEPS_PID_HSD" ALARM_ID='Alarm_id_6' MODME_NUME="1"/>
+    <errlog TYPE="ERROR_REPORT" FAULT_ID="FAULT_ID_HRPD_OOS_" PID="UEPS_PID_HSD" ALARM_ID='Alarm_id_7' MODME_NUME="2"/>
+</errlog_catalog>

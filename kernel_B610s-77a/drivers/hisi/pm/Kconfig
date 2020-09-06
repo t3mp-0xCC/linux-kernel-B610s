@@ -1,0 +1,11 @@
+
+config BALONG_PM_SUSPEND
+	bool "balong pm suspend"
+	select SUSPEND
+	select ARCH_SUSPEND_POSSIBLE
+	select PM
+	select PM_SLEEP
+	select CPU_V7
+	default n
+	help
+	support for pm suspend

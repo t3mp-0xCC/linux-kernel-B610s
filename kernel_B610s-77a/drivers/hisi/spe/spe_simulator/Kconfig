@@ -1,0 +1,9 @@
+menu "spe simulator"
+	depends on NET && INET && NETFILTER && NF_CONNTRACK
+
+config SPE_SIM
+	bool "spe simulator module"
+	help
+	  If this option is enabled, the kernel will include support
+	  for spe simulator.
+endmenu

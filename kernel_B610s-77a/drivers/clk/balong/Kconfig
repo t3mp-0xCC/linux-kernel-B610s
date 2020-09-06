@@ -1,0 +1,16 @@
+
+config BALONG_CLK
+	depends on COMMON_CLK
+	bool "clock driver of HISI Soc"
+	default y
+
+config CLK_DEBUG
+	depends on COMMON_CLK_DEBUG
+	bool "debug optinon for clock driver of HiSI Soc"
+	default y
+
+config BALONG_CLK_ALWAYS_ON
+	depends on BALONG_CLK
+	bool "all clocks of Hisi Soc are always on"
+	default n
+

@@ -1,0 +1,15 @@
+#
+# Balong SoC audio configuration
+#
+
+menu "Hisi Balong Sound"
+
+# slic balong
+source "sound/soc/balong/slic/Kconfig"
+
+# audio balong
+source "sound/soc/balong/audio/Kconfig"
+
+#solution pcm drv
+source "sound/soc/balong/solution/Kconfig"
+endmenu

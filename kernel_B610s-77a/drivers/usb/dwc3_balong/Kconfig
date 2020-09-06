@@ -1,0 +1,111 @@
+config USB_DWC3_BALONG
+	tristate "DesignWare USB3 DRD Core Support For Balong"
+	depends on (USB || USB_GADGET) && GENERIC_HARDIRQS
+	select USB_XHCI_PLATFORM if USB_SUPPORT && USB_XHCI_HCD
+	select USB_PHY
+	select USB_BCCTRL
+	select BALONG_USB2PHY
+	select BALONG_USB3PHY
+	help
+	  Say Y or M here if your system has a Dual Role SuperSpeed
+	  USB controller based on the DesignWare USB3 IP Core.
+
+	  If you choose to build this driver is a dynamically linked
+	  module, the module will be called dwc3.ko.
+
+if USB_DWC3_BALONG
+
+choice
+	bool "DWC3 Mode Selection For Balong"
+	default USB_DWC3_DUAL_ROLE if (USB && USB_GADGET)
+	default USB_DWC3_HOST if (USB && !USB_GADGET)
+	default USB_DWC3_GADGET if (!USB && USB_GADGET)
+
+config USB_DWC3_HOST
+	bool "Host only mode"
+	depends on USB=y || USB=USB_DWC3_BALONG
+	help
+	  Select this when you want to use DWC3 in host mode only,
+	  thereby the gadget feature will be regressed.
+
+config USB_DWC3_GADGET
+	bool "Gadget only mode"
+	depends on USB_GADGET=y || USB_GADGET=USB_DWC3_BALONG
+	help
+	  Select this when you want to use DWC3 in gadget mode only,
+	  thereby the host feature will be regressed.
+
+config USB_DWC3_DUAL_ROLE
+	bool "Dual Role mode"
+	depends on ((USB=y || USB=USB_DWC3_BALONG) && (USB_GADGET=y || USB_GADGET=USB_DWC3_BALONG))
+	help
+	  This is the default mode of working of DWC3 controller where
+	  both host and gadget features are enabled.
+
+endchoice
+
+config USB_BCCTRL
+	bool "Balong usb bcctrl"
+	help
+		buttery control
+
+config USB_DWC3_BALONG_PM
+	bool "Dwc3 balong pm support"
+	help
+	  select it if you'd like to use dwc3 balong pm support.
+
+config GADGET_CORE_HIBERNATION
+	bool "Support USB core hibernation"
+	help
+	  Say Y here to support USB core hibernation.
+	  This can put USB and app cpu into sleep when
+	  usb port still connected.
+	 
+	  
+config USB_U1U2_DISABLE
+	bool "Disable USB3.0 U1&U2 Link state"
+	help
+	  Say Y here to disable USB3.0 U1&U2 Link state.
+	  This is for evade balong chip defect.
+	  
+config GADGET_SUPPORT_REMOTE_WAKEUP
+	bool "Support the remote wakeup"
+	help
+	  Say Y here to support remote gadget remote wakeup.
+
+config DWC3_INTERRUPT_GATHER
+	bool "dwc3 interrupt gather"
+	help
+		select it if you'd like to reduce the interrupt pressure.
+
+config USB_CDC_NCM_DWC_CACHE_TRB_NUM
+        int "Number of synopsys ip trb caches"
+        default 16
+
+config USB_DWC3_SKIP_IRQTHREAD
+        bool "dwc3 interrupt skip irqthread"
+	help
+		select it if you'd like to skip irqthread.
+
+config USB_DWC3_NOLOOP_SGS 
+        bool "dwc3 not loop sgs"
+	help
+		select it if you'd like to skip loop sgs.
+
+config USB_DWC3_DEBUG
+	bool "Enable Debugging Messages"
+	help
+	  Say Y here to enable debugging messages on DWC3 Driver.
+
+config USB_DWC3_VERBOSE
+	bool "Enable Verbose Debugging Messages"
+	depends on USB_DWC3_DEBUG
+	help
+	  Say Y here to enable verbose debugging messages on DWC3 Driver.
+
+config USB_DWC3_DBG
+	bool "dwc3 dbg(balong) system"
+	help
+		select it if you'd like to use dwc3 dbg system.
+
+endif

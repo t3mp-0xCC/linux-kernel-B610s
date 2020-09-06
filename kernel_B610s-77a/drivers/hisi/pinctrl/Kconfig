@@ -1,0 +1,11 @@
+#
+# pinctrl balong configuration
+#
+
+comment "balong pinctrl"
+
+config PINCTRL_BALONG
+	tristate "pinctrl"
+	help
+	  PINCTRL_BALONG 
+	  

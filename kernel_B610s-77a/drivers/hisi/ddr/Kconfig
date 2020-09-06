@@ -1,0 +1,12 @@
+#
+# Balong ddr test configuration
+#
+
+comment "ddr test in kernel "
+
+config DDR_TEST_KERNEL
+	tristate "support ddr test kernel"
+	default n
+	help
+	  ddr test
+	  

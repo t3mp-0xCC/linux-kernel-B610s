@@ -1,0 +1,37 @@
+menuconfig CORESIGHT
+	bool "CoreSight Tracing Support"
+	help
+	  This framework provides an interface for the CoreSight debug and
+	  trace drivers to register themselves with. It's intended to build
+	  up a topological view of the CoreSight components and configure
+	  the right series of components on user input via sysfs. It also
+	  provides status information to user space applications through
+	  the debugfs interface.
+
+if CORESIGHT
+
+config CORESIGHT_LINKS_AND_SINKS
+	bool "CoreSight Link and Sink drivers"
+	help
+	  This enables support for CoreSight link and sink drivers that are
+	  responsible for transporting and collecting the trace data
+	  respectively.
+
+config CORESIGHT_SOURCE_ETM
+	bool "CoreSight Embedded Trace Macrocell driver"
+	select CORESIGHT_LINKS_AND_SINKS
+	help
+	  This driver provides support for processor tracing which allows
+	  tracing the instructions that the processor is executing. This is
+	  primarily useful for instruction level tracing.
+
+config CORESIGHT_SOURCE_ETM_DEFAULT_ENABLE
+	bool "Turn on CoreSight ETM tracing by default"
+	depends on CORESIGHT_SOURCE_ETM
+	help
+	  Turns on CoreSight ETM tracing (processor tracing) by default.
+	  Otherwise, tracing is disabled by default but can be enabled via
+	  debugfs.
+
+	  If unsure, say 'N' here to avoid unwanted power consumption.
+endif

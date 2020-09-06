@@ -1,0 +1,25 @@
+
+config MBB_MLOG_DRV
+	tristate "mobilelog driver"
+	default n
+	help
+	  mobilelog driver
+
+config MBB_MLOG_DRV_TEST
+	tristate "mobilelog driver test"
+	default n
+	help
+	  mobilelog driver test
+	  
+config MBB_DLOAD
+	tristate "huaweidload driver"
+	default n
+	help
+	  huaweidload driver test
+
+
+config FLIGHT_MODE
+        tristate "flightmode"
+        default n	
+	help
+          flightmode driver

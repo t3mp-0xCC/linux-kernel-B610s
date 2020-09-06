@@ -1,0 +1,35 @@
+#ifndef __OSL_PRINTF_H
+#define __OSL_PRINTF_H
+
+#ifdef __OS_RTOSCK__
+#include <sre_shell.h>
+#include <securec.h>
+static inline void osl_printf(const CHAR *pcFormat, ...)
+{
+	va_list arglist;
+	char  buf_trans_temp[255+1] = {0};
+	int fmt_len =0;
+	int errno =0;
+
+	va_start(arglist, pcFormat);/* [false alarm]:fortify  */
+	 /*lint -save -e830 -e539 -e661*/
+	fmt_len = vsnprintf_s(buf_trans_temp, 255, 255, pcFormat, arglist);
+	va_end(arglist);/* [false alarm]:fortify  */
+
+	if(fmt_len > 255)
+	{
+		buf_trans_temp[255] = '\0';
+		errno = printf("input string too long:%s ...\n",buf_trans_temp);
+		goto out;
+	}
+	buf_trans_temp[fmt_len] = '\0';/* [false alarm]:fortify  */
+	errno= printf("%s",buf_trans_temp);
+out:
+	if(errno)
+	{
+		return;
+	}		
+}
+#endif
+
+#endif

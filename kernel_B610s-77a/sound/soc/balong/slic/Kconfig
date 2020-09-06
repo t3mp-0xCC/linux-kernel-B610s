@@ -1,0 +1,5 @@
+config SND_SOC_BALONG
+	tristate "ASoC support for Balong"
+	help
+	  Say Y or M if you want to add support for zarlink codecs attached
+	  to the Balong SoCs' Voip interfaces.
