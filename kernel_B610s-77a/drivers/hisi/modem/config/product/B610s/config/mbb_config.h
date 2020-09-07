@@ -261,7 +261,7 @@ extern "C"
 #endif
 
 #if (FEATURE_ON == MBB_WIFI)
-#define    MBB_WIFI_CHIP1                      bcm4352            /* 二级宏：该宏控制编译哪款芯片.芯片目录命名规则为厂商+编号如：rtl8129, bcm43217,这是和对应的驱动目录名称要一样的。 */
+#define    MBB_WIFI_CHIP1                      bcm43217            /* 二级宏：该宏控制编译哪款芯片.芯片目录命名规则为厂商+编号如：rtl8129, bcm43217,这是和对应的驱动目录名称要一样的。 */
 #define    MBB_WIFI_CHIP2                      FEATURE_OFF        /* 二级宏：该宏控制编译哪款芯片.芯片目录命名规则为厂商+编号如：rtl8129, bcm43217,这是和对应的驱动目录名称要一样的。 */
 #define    MBB_WIFI_BCM_RFCAL                  FEATURE_ON         /* 二级宏：CPE双博通芯片射频校准宏 */
 #endif

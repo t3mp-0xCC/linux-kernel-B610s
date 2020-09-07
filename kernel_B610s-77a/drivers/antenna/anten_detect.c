@@ -15,8 +15,6 @@
  */
 
 
-/* Fix: Add linux.of.h for L914 ".of_match_table = of_match_ptr(of_gpio_antenna_match)," */
-#include <linux/of.h>
 
 #include <linux/init.h>
 #include <linux/module.h>
@@ -34,6 +32,7 @@
 #include <linux/slab.h>
 #include "mbb_anten.h"
 #include "anten_detect.h"
+#if (FEATURE_ON == MBB_RFFE_ANT_TO_MAIN_EXANT)
 #include "bsp_icc.h"
 #include "product_nv_id.h"
 #include "product_nv_def.h"
@@ -47,6 +46,7 @@ struct anten_msg_stru
 #define MAIN_ANT_TYPE 0   /*0表示为主天线1表示为副天线*/
 static NV_RF_ANTEN_DETECT_GPIO_STRU g_anten_stru = {0}; /*nv 50569的配置信息*/
 static int g_main_exant_detect_state = 1; /*天线插入的状态，0表示低电平，1表示为高电平*/
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -459,6 +459,7 @@ static const struct file_operations ant_operations = {
     .poll  = ant_poll,
 };
 
+#if (FEATURE_ON == MBB_RFFE_ANT_TO_MAIN_EXANT)
 /*****************************************************************************
  函 数 名  : ant_handle_work
  功能描述  : 判断如果主外置天线状态发生变化，将他的状态通过icc发送给c核处理
@@ -495,6 +496,8 @@ static void ant_handle_work(ant_detect_info* detect)
         }
     }
 }
+#endif
+
 static void ant_timer_fn(unsigned long data)
 {
     ant_detect_info* detect = (ant_detect_info*)data;
@@ -508,7 +511,9 @@ static void ant_timer_fn(unsigned long data)
     
     spin_lock_irqsave(&detect->ops_lock, flags);
 
+#if (FEATURE_ON == MBB_RFFE_ANT_TO_MAIN_EXANT)
     ant_handle_work(detect);
+#endif
 
     if (detect->insert_value == gpio_get_value((unsigned)(detect->gpio_num)))
     {
@@ -805,6 +810,7 @@ static int antenna_proc_init(void)
     return 0;
 }
 
+#if (FEATURE_ON == MBB_RFFE_ANT_TO_MAIN_EXANT)
 /*****************************************************************************
  函 数 名  : antenna_nv_gpio_init
  功能描述  : 获取指定nv50569的配置信息
@@ -824,6 +830,7 @@ static int antenna_nv_gpio_init(void)
     }
     return ret;
 }
+#endif
 
 /*****************************************************************************
  函 数 名  : antenna_gpio_probe
@@ -858,12 +865,14 @@ static int antenna_gpio_probe(struct platform_device *pdev)
         return ANTE_ERR;
     }
 
+#if (FEATURE_ON == MBB_RFFE_ANT_TO_MAIN_EXANT)
     /*获取指定nv50569的配置信息*/
     ret = antenna_nv_gpio_init();
     if (0 != ret)
     {
         return ANTE_ERR;
     }
+#endif
 
     /*对天线进行相关配置和初始化*/
     ret = antenna_gpio_init();
