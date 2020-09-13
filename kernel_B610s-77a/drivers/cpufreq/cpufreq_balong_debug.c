@@ -67,7 +67,8 @@
 #include <bsp_icc.h>
 #include <drv_comm.h>
 
-#include <cpufreq_balong.h>
+/* 2020-09-13 fix cpufreq_balong.h not found problem */
+#include "cpufreq_balong.h"
 
 #ifdef __cplusplus
 extern "C"
