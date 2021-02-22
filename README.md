@@ -28,8 +28,8 @@ make mrproper
 
 How to build  
 ------------  
-0. Get cross compiler
-I recommend linaro.org one
+0. Get cross compiler  
+I recommend linaro.org one  
 https://releases.linaro.org/components/toolchain/binaries/4.9-2017.01/armeb-eabi  
 ```
 wget https://releases.linaro.org/components/toolchain/binaries/4.9-2017.01/armeb-eabi/gcc-linaro-4.9.4-2017.01-x86_64_armeb-eabi.tar.xz
