@@ -19,11 +19,11 @@ make ARCH=arm B610s_defconfig
 
 make menuconfig ARCH=arm 
 ```
-4. Overwrite defconfig
+3. Overwrite defconfig
 ```
 mv -f .config arch/arm/B610s_defconfig
 ```
-3. Cleaning  
+4. Cleaning  
 ```
 make mrproper
 ```
