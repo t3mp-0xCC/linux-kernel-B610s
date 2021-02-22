@@ -2,8 +2,8 @@
 
 Overview
 ------------
-This kernel source is for B610s-77a, porting from B618s-22d OSS kernel.  
-B618s-22d source code(https://consumer.huawei.com/en/opensource/detail/?siteCode=worldwide&keywords=b618s&fileType=openSourceSoftware&pageSize=10&curPage=1)  
+linux kernel source for B610s-77a. Porting from B618s-22d linux kernel.  
+B618s-22d kernel source code(https://consumer.huawei.com/en/opensource/detail/?siteCode=worldwide&keywords=b618s&fileType=openSourceSoftware&pageSize=10&curPage=1)  
 
 How to configure  
 ------------  
@@ -28,6 +28,13 @@ make mrproper
 
 How to build  
 ------------  
+0. Get cross compiler
+I recommend linaro.org one
+https://releases.linaro.org/components/toolchain/binaries/4.9-2017.01/armeb-eabi  
+```
+wget https://releases.linaro.org/components/toolchain/binaries/4.9-2017.01/armeb-eabi/gcc-linaro-4.9.4-2017.01-x86_64_armeb-eabi.tar.xz
+tar xvf gcc-linaro-4.9.4-2017.01-x86_64_armeb-eabi.tar.xz
+```
 1. Set some variables  
 ```
 export PATH=$PATH:/path/to/gcc-linaro-4.9.4-2017.01-x86_64_arm-eabi/bin
