@@ -5,7 +5,8 @@ Overview
 linux kernel source for B610s-77a. Porting from B618s-22d linux kernel.  
 B618s-22d kernel source code(https://consumer.huawei.com/en/opensource/detail/?siteCode=worldwide&keywords=b618s&fileType=openSourceSoftware&pageSize=10&curPage=1)  
 
-detail : https://greentea-hoge.hatenablog.com/entry/2020/09/03/172235
+detail : https://greentea-hoge.hatenablog.com/entry/2020/09/03/172235  
+
 How to configure  
 ------------  
 1. Change current directory  
