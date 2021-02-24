@@ -1,1 +1,0 @@
-obj-y	+= balong_early_fs.o

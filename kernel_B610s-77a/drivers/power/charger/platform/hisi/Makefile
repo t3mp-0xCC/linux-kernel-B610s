@@ -1,1 +1,0 @@
-obj-y	+=	chg_chip_platform.o

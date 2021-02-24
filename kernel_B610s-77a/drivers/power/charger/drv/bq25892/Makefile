@@ -1,2 +1,0 @@
-obj-y	+=	chg_charge_drv.o
-

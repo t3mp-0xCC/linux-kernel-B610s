@@ -1,7 +1,0 @@
-menu "SPE Drivers"
-
-source "drivers/hisi/spe/spe_drv/Kconfig"
-
-source "drivers/hisi/spe/spe_simulator/Kconfig"
-
-endmenu

@@ -1,1 +1,0 @@
-obj-$(CONFIG_DDR_TEST_KERNEL)         += ddr_test.o
