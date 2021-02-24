@@ -1,0 +1,26 @@
+
+config WLAN_BCM_CHIP
+	bool "WIFI CHIP SUPPORT"
+	depends on WLAN
+	select WIRELESS_EXT
+	#select WEXT_CORE
+	select WEXT_PRIV
+	#select WEXT_PROC
+	---help---
+	  The wifi chip configuration. 
+	  
+config BCM_FLWCTL
+	bool "BROADCOM FLWCTL FIX"
+	depends on WLAN_BCM_CHIP 
+	help
+		select it if you'd like to fix flow control issue.
+
+config WLAN_RTL_CHIP
+	bool "WIFI CHIP SUPPORT"
+	depends on WLAN
+	select WIRELESS_EXT
+	select WEXT_CORE
+	select WEXT_PRIV
+	select WEXT_PROC
+	---help---
+	  The wifi chip configuration. 

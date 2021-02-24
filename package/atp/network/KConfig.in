@@ -1,0 +1,173 @@
+menu "Network Linux Kernel Extension"
+
+config ATP_BRIDGE_PORT_RELAY
+    bool "support dhcp port relay in bridge"
+    default n
+	
+config ATP_DROP_ARP
+	bool "drop the arp packages"
+	default y
+	help
+		 the arp package is from wan to lan, br to wan.
+
+config ATP_PRSITE
+	bool "prsite"
+	default n
+
+config ATP_GUESTWIFI_ACCESS_UI
+        bool "guestwifiaccessui"
+        default n
+
+config ATP_ARP_REPLY_TO_ANY_ADDR
+	bool "Reply to the broadcast ip and anycast ip"
+	default n	
+config ATP_PASS_UP_DAD_PACKETS
+	bool "support pass the dad packets to the userspace"
+	default n
+
+# CONFIG_MIPS_BRCM Begin Broadcom changed code.
+config ATP_BRIDGE_EBT_TIME
+	tristate "ebt: time filter support"
+	depends on BRIDGE_NF_EBTABLES
+	help
+	  This option adds the system time match, which allows the filtering
+	  of system time when a frame arrives.
+
+	  To compile it as a module, choose M here.  If unsure, say N.
+# CONFIG_MIPS_BRCM End Broadcom changed code.
+	
+config FIREWALL
+	tristate "FIREWALL"
+	default y
+config ATP_FIREWALL_LOG
+	bool "Support Firewall log"
+	default y
+	depends on FIREWALL
+	
+config ATP_SYMNAT
+	bool "Support symnat "
+	default n
+	depends on (NF_NAT || IP_NF_NAT)
+
+config ATP_IP_NF_TARGET_CONENAT
+	tristate "CONENAT target support"
+	depends on (NF_NAT || IP_NF_NAT)
+	help
+	  Masquerading is a special case of NAT: all outgoing connections are
+	  changed to seem to come from a particular interface's address, and
+	  if the interface goes down, those connections are lost.  This is
+	  only useful for dialup accounts with dynamic IP address (ie. your IP
+	  address will be different on next dialup).
+
+	  To compile it as a module, choose M here.  If unsure, say N.
+
+config ATP_IP_NF_TARGET_ALLCONENAT
+	tristate "ALL CONENAT target support"
+	depends on (NF_NAT || IP_NF_NAT)
+    default n if ATP_IP_NF_TARGET_CONENAT != n
+	help
+     This feature enable 3 type of cone nat: full cone nat, address restriceted
+     cone nat and port restricted cone nat.
+
+     To compile it as a module, choose M here.  If unsure, say N.
+	 
+config ATP_IP_NF_TARGET_PORTTRIGER
+	tristate "PORTTRIGER support"
+	default m if NETFILTER_ADVANCED=n
+	help
+	  support port triger
+
+	  To compile it as a module, choose M here.  If unsure, say N.
+
+config ATP_NETFILTER_XT_MATCH_DNS_FLT
+	tristate  '"dns_flt" match support'
+	depends on NETFILTER_XTABLES
+	help
+    This option adds a `dns_flt' match, which allows you to match
+    the dns name in the dns packet.
+
+    If you want to compile it as a module, say M here and read
+    <file:Documentation/modules.txt>.  If unsure, say `N'.
+
+config ATP_NF_CONNTRACK_RTSP  
+	tristate "RTSP protocol support"  
+	depends on NF_CONNTRACK  
+	help  
+	     Support the RTSP protocol.  This allows UDP transports to be setup  
+	     properly, including RTP and RDT.  
+	
+	     If you want to compile it as a module, say 'M' here and read  
+	     Documentation/modules.txt.  If unsure, say 'Y'.  
+
+config ATP_CT_CLEAN
+       tristate "Support ATP Conntrack Clean"
+       help
+       delete conntrack by forward rule
+       default n
+
+config ATP_COMMON_CT_CLEAN
+	bool "Support General Conntrack Clean"
+	default n
+	
+config ATP_FASTIP
+	tristate "HUAWEI Fast IP module"
+	default n
+	help
+	HUAWEI Fast IP module.
+config ATP_DNSCACHE
+	tristate "HUAWEI DNS CACHE module"
+	default n
+	help
+		HUAWEI DNS CACHE module.	
+
+config ATP_ONDEMAND_DIAL
+	bool "support 3G/4G ondemand dial"
+	default n
+	help
+		3G/4G ondemand dial feature
+
+config ATP_QCT_WAN_DEVICE
+	bool "Support Qualcomm platform WAN device"
+	default n
+	help
+		Qualcomm platform WAN device
+
+config ATP_QCT_ONDEMAND_DIAL
+	bool "support Qualcomm platform 3G/4G ondemand dial"
+	depends on ATP_ONDEMAND_DIAL
+	default n
+	help
+		Qualcomm platform 3G/4G ondemand dial
+config ATP_RMNET
+	tristate "HUAWEI RMNET Virtual Network Device"
+	default n
+	help
+	  Virtual ethernet interface for HUAWEI RMNET transport.
+
+config ATP_SMUX
+	bool "Multi wan"
+	default n
+
+config ATP_MBB_ARCH
+	bool "SMUX adapter"
+	default n
+config IMQ
+    tristate "imq Virtual Network Device"
+	default n
+	help
+	  Virtual ethernet interface for qos function mirred egress redirect.	
+config DOWN_RATE_CONTROL	  
+    tristate "QOS DOWN RATE CONTROL"
+	default n
+	help
+	  QOS DOWN RATE CONTROL.	
+config ATP_GETINDEV
+	bool "Get in dev, for dhcp each port assign"
+	default n
+	
+config ATP_ICMPTIMESTAP_DROP
+	bool "discard icmp type 13 timestamp request"
+	default n	
+endmenu
+
+

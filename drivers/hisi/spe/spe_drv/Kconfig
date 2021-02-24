@@ -1,0 +1,43 @@
+menu "smart packet process"
+	depends on NET && INET && NETFILTER && NF_CONNTRACK
+
+config BALONG_SPE
+	tristate "smart packet process module"
+	help
+	  If this option is enabled, the kernel will include support
+	  for soft fast forward.
+
+if BALONG_SPE
+config BALONG_SPE_SIM
+	bool "spe simulator"
+	help
+	  Enable to use spe simulator.
+
+config BALONG_SPE_EVENT_BUILTIN_BUF
+	bool "spe builtin event buffer"
+	help
+	  Enable to use spe builtin event buffer.
+
+config BALONG_SPE_IPFW_MUTENODE
+	bool "spe ip fw use mutenode"
+	help
+	  Enable to use spe ip fw subnode.
+
+config BALONG_SPE_TD_TIMESTAMP
+	bool "spe td use timestamp"
+	help
+	  Enable to use spe td timestamp.
+
+config BALONG_SPE_DEBUG
+	bool "debug info for spe module"
+	help
+	  Enable to check the debug info. Strongly suggested to disable 
+	  when compiled an release version
+
+config BALONG_SPE_DFS
+	bool "spe dfs"
+	help
+	  Enable to use spe dfs.	  
+	  
+endif #if BALONG_SPE
+endmenu

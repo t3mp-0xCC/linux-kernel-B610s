@@ -1,0 +1,9 @@
+#
+# Balong dump configuration
+#
+
+config HISI_WATCHPOINT
+	tristate "hisi watchpoint"
+	default n
+	help
+		balong watchpoint for kernel

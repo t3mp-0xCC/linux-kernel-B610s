@@ -1,0 +1,10 @@
+#
+# Balong multicarrier driver configuration
+#
+
+comment "balong multicarrier driver"
+
+config MULTI_CARRIER
+	tristate "multicarrier"
+	help
+		multicarrier driver

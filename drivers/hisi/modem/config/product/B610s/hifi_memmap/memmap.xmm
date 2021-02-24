@@ -1,0 +1,35 @@
+
+
+BEGIN iram0
+0x7fe10000: instRam : iram0 : 0x1000 : executable, writable ;
+ iram0_0 : F : 0x7fe10000 - 0x7fe100ff : .ResetVector.text;
+ iram0_1 : C : 0x7fe10100 - 0x7fe103ff : .Reset.literal .Reset.text;
+ iram0_2 : F : 0x7fe10400 - 0x7fe10577 : .WindowVectors.text;
+ iram0_3 : C : 0x7fe10578 - 0x7fe1057f : .Level2InterruptVector.literal;
+ iram0_4 : F : 0x7fe10580 - 0x7fe105b7 : .Level2InterruptVector.text;
+ iram0_5 : C : 0x7fe105b8 - 0x7fe105bf : .Level3InterruptVector.literal;
+ iram0_6 : F : 0x7fe105c0 - 0x7fe105f7 : .Level3InterruptVector.text;
+ iram0_7 : C : 0x7fe105f8 - 0x7fe105ff : .Level4InterruptVector.literal;
+ iram0_8 : F : 0x7fe10600 - 0x7fe10637 : .Level4InterruptVector.text;
+ iram0_9 : C : 0x7fe10638 - 0x7fe1063f : .DebugExceptionVector.literal;
+ iram0_10 : F : 0x7fe10640 - 0x7fe10677 : .DebugExceptionVector.text;
+ iram0_11 : C : 0x7fe10678 - 0x7fe1067f : .NMIExceptionVector.literal;
+ iram0_12 : F : 0x7fe10680 - 0x7fe106b7 : .NMIExceptionVector.text;
+ iram0_13 : C : 0x7fe106b8 - 0x7fe106bf : .KernelExceptionVector.literal;
+ iram0_14 : F : 0x7fe106c0 - 0x7fe106f7 : .KernelExceptionVector.text;
+ iram0_15 : C : 0x7fe106f8 - 0x7fe106ff : .UserExceptionVector.literal;
+ iram0_16 : F : 0x7fe10700 - 0x7fe10737 : .UserExceptionVector.text;
+ iram0_17 : C : 0x7fe10738 - 0x7fe1077f : .DoubleExceptionVector.literal;
+ iram0_18 : F : 0x7fe10780 - 0x7fe107b7 : .DoubleExceptionVector.text;
+ iram0_19 : C : 0x7fe107b8 - 0x7fe10fff : .iram0.literal .iram0.text;
+END iram0
+
+BEGIN dram0
+0x7fe00000: dataRam : dram0 : 0x10000 : writable ;
+ dram0_0 : C : 0x7fe00000 - 0x7fe0ffff :  STACK :  HEAP : .dram0.rodata .dram0.literal .dram0.data .dram0.bss .om.debug.bss .os.stack.bss;
+END dram0
+
+BEGIN sram
+0x46c00000: sysram : sram : 0x200000 : executable, writable ;
+ sram0 : C : 0x46c00000 - 0x46dfffff : .sram.shareaddr .sram.rodata .rodata .sram.literal .literal .sram.text .text .sram.data .data .sram.uninit .sram.bss .bss;
+END sram

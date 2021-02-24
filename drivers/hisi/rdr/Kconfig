@@ -1,0 +1,9 @@
+#
+# Balong rdr configuration
+#
+
+config BALONG_RDR
+	tristate "balong rdr"
+	default n
+	help
+		balong rdr for kernel

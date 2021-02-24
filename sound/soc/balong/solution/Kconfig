@@ -1,0 +1,5 @@
+config SND_MODULE_PCM
+	tristate "ASoC Audio support for Balong"	
+	help
+	  Say Y or M if you want to add support for module pcm driver attached
+	  to the Balong SoCs' AUDIO interfaces.

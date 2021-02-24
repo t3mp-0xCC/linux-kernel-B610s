@@ -1,0 +1,10 @@
+menu "ATP Linux Kernel Extension"
+config ATP_ROUTE
+	bool "Support ATP feature"
+	default y
+config ATP_COMMON
+	select TRACEPOINTS
+	bool "ATP common features"
+	default n
+source "package/atp/network/KConfig.in"
+endmenu

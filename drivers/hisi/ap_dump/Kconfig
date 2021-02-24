@@ -1,0 +1,12 @@
+#
+# balong early mount fs 
+#
+
+comment "balong AP KERNEL DUMP"
+
+config BALONG_EARLY_FS
+	tristate "balong ap kernrl dump"
+	default n
+	help
+	  balong ap kernrl dump
+	  

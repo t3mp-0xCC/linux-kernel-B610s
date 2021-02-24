@@ -1,0 +1,32 @@
+
+menu "balong Soc Type"
+
+config  BALONG_CACHE_L2X0
+	bool "balong l2c"
+	default n
+	help 
+	    support for hisilicon balong l2cache
+
+config  BALONG_MINI_SYSTEM
+	bool "balong mini system"
+	default n
+	help 
+	    support for hisilicon balong mini system
+	    
+config  BALONG_SYSCNT
+	bool "balong syscnt"
+	default n
+	help 
+	    support for hisilicon balong syscnt
+	    
+config BALONG_SYS_TIMER
+	bool "balong sys timer"
+	default n
+	help 
+	    support for hisilicon balong sys timer
+
+
+endmenu
+
+
+

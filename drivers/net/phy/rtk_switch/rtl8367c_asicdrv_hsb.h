@@ -1,0 +1,41 @@
+/* 
+ * Copyright (C) 2013 Realtek Semiconductor Corp.  All Rights Reserved.
+ * 
+ * www.realtek.com 
+ * 
+ * This program is free software; you can redistribute it and/or modify 
+ * it under the terms of the GNU General Public License version 2 and 
+ * only version 2 as published by the Free Software Foundation. 
+ * 
+ * This program is distributed in the hope that it will be useful, 
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of 
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU General Public License for more details. 
+ * 
+ */ 
+#ifndef _RTL8367C_ASICDRV__HSB_H_
+#define _RTL8367C_ASICDRV__HSB_H_
+
+#include <rtl8367c_asicdrv.h>
+
+#define RTL8367C_FIELDSEL_FORMAT_NUMBER      (16)
+#define RTL8367C_FIELDSEL_MAX_OFFSET         (255)
+
+enum FIELDSEL_FORMAT_FORMAT
+{
+    FIELDSEL_FORMAT_DEFAULT = 0,
+    FIELDSEL_FORMAT_RAW,
+	FIELDSEL_FORMAT_LLC,
+	FIELDSEL_FORMAT_IPV4,
+	FIELDSEL_FORMAT_ARP,
+	FIELDSEL_FORMAT_IPV6,
+	FIELDSEL_FORMAT_IPPAYLOAD,
+	FIELDSEL_FORMAT_L4PAYLOAD,
+    FIELDSEL_FORMAT_END
+};
+
+extern ret_t rtl8367c_setAsicFieldSelector(rtk_uint32 index, rtk_uint32 format, rtk_uint32 offset);
+extern ret_t rtl8367c_getAsicFieldSelector(rtk_uint32 index, rtk_uint32* pFormat, rtk_uint32* pOffset);
+
+#endif /*_RTL8367C_ASICDRV__HSB_H_*/
+
