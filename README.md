@@ -31,6 +31,7 @@ make mrproper
 How to build  
 ------------  
 0. Get cross compiler  
+
 I recommend linaro.org one  
 https://releases.linaro.org/components/toolchain/binaries/4.9-2017.01/armeb-eabi  
 ```
